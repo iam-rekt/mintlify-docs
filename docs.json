@@ -3,6 +3,11 @@
   "theme": "mint",
   "name": "RobinSwap Docs",
   "description": "The operating manual for Robinhood Chain liquidity.",
+  "seo": {
+    "metatags": {
+      "canonical": "https://docs.robinswap.finance"
+    }
+  },
   "colors": {
     "primary": "#4a700a",
     "light": "#d8ff81",
