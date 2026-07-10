@@ -1,20 +1,49 @@
 ---
-title: "Introduction"
-description: "Welcome to your project"
+title: "RobinSwap Docs"
+description: "The operating manual for Robinhood Chain liquidity."
+mode: "custom"
 ---
 
-Write a short description of your product here. What it does, who it's for, and what they can accomplish with it.
+<div className="rs-hero -mx-6 -mt-10 px-6 pt-16 pb-10 sm:-mx-12 sm:px-12 lg:pt-28 lg:pb-16">
+  <div className="relative max-w-5xl mx-auto">
+    <svg className="rs-hero-mark" viewBox="0 0 48 48" aria-hidden="true">
+      <rect width="48" height="48" rx="14" fill="#c8f900"/>
+      <path d="M37.7 7.4C26.1 8.3 16.1 14.2 11.5 24c-2.5 5.3-2.4 10.7-1.4 15.8l5.8-6.2c4.6.9 9.6-1 12.6-5.2 4.6-6.4 5.9-13.7 9.2-21Z" fill="#080a06"/>
+      <path d="M12.1 39.2c6-9.5 12.7-17.1 22.2-26.3M16.7 32.8l8.6-.8M21 26.7l8.3-.8M25.3 20.9l7.2-.8" fill="none" stroke="#c8f900" strokeWidth="2.2" strokeLinecap="round"/>
+    </svg>
+    <div className="rs-hero-badge">Robinhood Chain · Mainnet</div>
+    <h1 className="rs-hero-title">Liquidity should feel<br/><span>legible.</span></h1>
+    <p className="rs-hero-copy">RobinSwap is an AMM for Robinhood Chain: concentrated ranges when precision matters, simple pools when it does not, and one surface for routing, positions, and onchain market data.</p>
+    <div className="mt-9 flex flex-wrap gap-3">
+      <a href="/quickstart" className="rs-cta-primary">Make your first swap →</a>
+      <a href="/reference/contracts" className="rs-cta-secondary">View deployed contracts</a>
+    </div>
+  </div>
+</div>
 
-<Tip>
-  Ready to make this your own? Start by editing this page. Update your `docs.json` file to customize your site. Then fill out the [Quickstart](/quickstart) page.
-</Tip>
+<div className="max-w-5xl mx-auto py-12 sm:py-16">
+  <div className="grid gap-4 sm:grid-cols-3">
+    <div className="rs-stage-card"><p>01 / Trade</p><h2>One quote, clear route.</h2><span>RobinSwap pools take priority. External execution is a fallback when a local pool cannot quote or would create excessive impact.</span></div>
+    <div className="rs-stage-card"><p>02 / Provide</p><h2>Ranges without fog.</h2><span>Create a concentrated V3 position, inspect its range, collect fees, and rebalance from the portfolio.</span></div>
+    <div className="rs-stage-card"><p>03 / Observe</p><h2>Data from the chain.</h2><span>Explore pools, tokens, swaps, liquidity, TVL, volume and fee history directly from indexed protocol events.</span></div>
+  </div>
 
-<Card title="Quickstart" icon="rocket" href="/quickstart">
-  This card links to the quickstart page in your project.
-</Card>
-<Card title="Components" icon="puzzle-piece" href="https://mintlify.com/docs/components">
-  Add cards, callouts, steps, tabs, and more to design and structure your pages.
-</Card>
-<Card title="Settings" icon="gear" href="https://mintlify.com/docs/organize/settings">
-  Set your site name, branding, and navigation in the `docs.json` file.
-</Card>
+  <h2 className="mt-16 text-3xl font-semibold tracking-tight">Choose your route</h2>
+  <Columns cols={2}>
+    <Card title="Quickstart" icon="bolt" href="/quickstart">Connect, switch to Robinhood Chain, review a quote, and make a first swap.</Card>
+    <Card title="Swap guide" icon="arrow-right-arrow-left" href="/guides/swap">Understand routes, minimum received, native ETH, approvals and confirmations.</Card>
+    <Card title="Liquidity guide" icon="chart-line" href="/guides/liquidity">Create a V2 or V3 position, choose a range, and understand pool initialization.</Card>
+    <Card title="Portfolio guide" icon="wallet" href="/guides/portfolio">Manage positions, ranges, fees, points and referrals in one place.</Card>
+    <Card title="Contract reference" icon="file-contract" href="/reference/contracts">Mainnet addresses, fee tiers, explorer links and deployment evidence.</Card>
+  </Columns>
+
+  <Frame caption="Explore is the live read on RobinSwap markets: pool activity, liquidity, volume and token movement in one place.">
+    <img src="/images/Explore.png" alt="RobinSwap Explore page showing live market metrics, token data and pool activity." />
+  </Frame>
+
+  <div className="rs-callout">
+    <p>A note on risk</p>
+    <p className="mt-2 text-lg font-medium">Onchain settlement is real. Interfaces and indexes are convenience layers.</p>
+    <p className="mt-2 text-sm text-gray-700 dark:text-zinc-300">Verify token addresses, pool state, price impact and transaction details before signing. Documentation describes the current deployment; it is not financial, legal, or security advice.</p>
+  </div>
+</div>

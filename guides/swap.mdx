@@ -1,0 +1,66 @@
+---
+title: "Swap on RobinSwap"
+description: "Choose tokens, read a route, and execute a trade with a clear minimum output."
+---
+
+## Read the route before you sign
+
+The swap card treats every executable path as a RobinSwap quote. It favors a configured RobinSwap pool whenever that pool can quote within the routing guard. When a local pool is absent or its expected price impact is above the configured threshold, the interface can compare supported external paths by their guaranteed minimum output.
+
+<Note>
+  A route is an execution plan, not a price promise. The minimum received is the amount protected by your configured slippage tolerance at transaction creation time.
+</Note>
+
+## Set up a swap
+
+1. Select a token and amount in **From**.
+2. Select the destination token in **To**. The list is isolated to the currently selected source network.
+3. Wait for the live quote to populate the output field.
+4. Open swap settings only if you need to change slippage tolerance.
+5. Check **Minimum received** and submit the approval or swap.
+
+## Native ETH and WETH
+
+Use **ETH** when you hold native ETH. You do not need to manually wrap it for normal RobinSwap interface flows. WETH is the pool-side representation used by V2/V3 contracts; the interface handles the required wrapping or unwrapping in supported transactions.
+
+## Local and external execution
+
+| Route type | When it is used | What to check |
+| --- | --- | --- |
+| RobinSwap V2/V3 | A local pool exists and quotes within the price-impact guard | Fee tier, minimum received, price impact |
+| Same-chain smart route | No local executable quote or a safer price is available | Minimum received and the destination contract |
+| RobinSwap Bridge | You start on another supported source network | Source network, Robinhood Chain destination, bridge status and final output |
+
+RobinSwap Bridge remains pending until settlement completes. RobinSwap keeps the route, destination, and completion state in the same swap flow; do not resend a transaction while a bridge is pending.
+
+## RobinSwap Bridge into Robinhood Chain
+
+RobinSwap Bridge is the cross-network experience inside the swap card. Start from a supported EVM network, select **Robinhood Chain** as the destination, and RobinSwap prepares one route into the token you selected there.
+
+1. Pick the network you are starting from.
+2. Keep **Robinhood Chain** as the destination.
+3. Choose the token you want to receive on Robinhood Chain and confirm the route.
+
+The route stays **Pending** while it settles. Wait for completion before starting another bridge for the same funds.
+
+## Slippage
+
+Slippage is the maximum difference you accept between the quote and the final onchain execution. A smaller setting provides tighter price protection but can make volatile or thin-pool trades revert. A larger setting makes execution more likely but allows more adverse movement.
+
+<Warning>
+  Do not raise slippage just to force a route through. First verify the token, the pool liquidity, and the price impact. Imported tokens and low-liquidity pools require extra care.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The output is blank">
+    Confirm both token addresses, a nonzero input amount, and the active network. A blank output can mean no supported route exists or the quote provider is temporarily unavailable.
+  </Accordion>
+  <Accordion title="Why do I need an approval?">
+    ERC-20 tokens require permission for the router to transfer the input amount. Approvals and swaps are distinct wallet transactions unless the token/route supports a combined authorization flow.
+  </Accordion>
+  <Accordion title="Why did my transaction revert?">
+    The market may have moved beyond your minimum received, the allowance/balance may be insufficient, or a route provider’s transaction may have expired. Refresh the quote and review the wallet simulation message.
+  </Accordion>
+</AccordionGroup>

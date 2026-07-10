@@ -1,0 +1,46 @@
+---
+title: "Manage your portfolio"
+description: "Inspect liquidity positions, collect fees, edit ranges, and understand what is onchain versus indexed."
+---
+
+Portfolio is wallet-specific. Connect the wallet that owns the position, then refresh positions on the active Robinhood Chain network.
+
+<Frame caption="Portfolio keeps positions and weekly points in the same calm, readable surface.">
+  <img src="/images/Portfolio.png" alt="RobinSwap Portfolio page with weekly points and liquidity position area." />
+</Frame>
+
+## What Portfolio can show
+
+- V3 position NFTs owned by the connected address.
+- Pool, fee tier, current price, chosen range, and in-range state.
+- Estimated liquidity composition and fees owed by the position manager.
+- V2 LP balances where they can be discovered from the selected pool set.
+- Points registration, weekly points, and referral information from the points service.
+
+## Adjust a V3 position
+
+When price moves outside your active range, your position does not earn swap fees. Use **Adjust range** when you want to move the position around the current price. It is a deliberate liquidity-management action, not an automatic repair.
+
+1. Open the position and inspect its current range versus the current price.
+2. Choose new bounds in the range chart.
+3. Review the token amounts that will be removed and reminted.
+4. Confirm the position-management transaction.
+
+The adjustment withdraws and remints the selected liquidity in the new range. The resulting V3 position can have a new token ID; Portfolio refreshes after confirmation.
+
+## Collect fees
+
+V3 fee amounts are accounted by the position manager. “Recorded owed” refers to tokens currently claimable by that position, not an offchain reward balance. Fees may be zero when no swaps accrued in range or if fees have already been collected.
+
+## Points and referrals
+
+Points are offchain program accounting, not a transferable token and not a smart-contract balance.
+
+- Sign once from the home/swap experience to register the wallet for points tracking.
+- Confirmed swaps and liquidity activity are verified from transaction receipts.
+- Weekly allocation is performed by the program operator according to the active rules.
+- Referral names provide a points-only boost after one-time attribution; they do not redirect protocol swap or LP fees.
+
+<Info>
+  Points values can be delayed while activity is confirmed and the weekly distribution is prepared. They should never be treated as a claim on protocol assets.
+</Info>

@@ -1,72 +1,51 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "RobinSwap Docs",
+  "description": "The operating manual for Robinhood Chain liquidity.",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#4a700a",
+    "light": "#d8ff81",
+    "dark": "#4a700a"
   },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
+  "favicon": "/favicon-32x32.png",
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
+  "navigation": {
+    "pages": [
+      {
+        "group": "Start here",
+        "pages": ["index", "quickstart"]
+      },
+      {
+        "group": "Use RobinSwap",
+        "pages": ["guides/swap", "guides/liquidity", "guides/portfolio", "guides/points"]
+      },
+      {
+        "group": "Reference",
+        "pages": ["reference/contracts"]
+      }
+    ],
+    "global": {
+      "anchors": [
+        { "anchor": "App", "href": "https://www.robinswap.finance", "icon": "arrow-up-right-from-square" },
+        { "anchor": "Explore", "href": "https://www.robinswap.finance/#explore", "icon": "chart-line" }
+      ]
+    }
+  },
   "navbar": {
     "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
+      { "label": "Explore markets", "href": "https://www.robinswap.finance/#explore" }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Open RobinSwap",
+      "href": "https://www.robinswap.finance"
     }
   },
   "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
-    ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    "options": ["copy", "view", "chatgpt", "claude", "perplexity", "mcp", "cursor", "vscode"]
   }
 }

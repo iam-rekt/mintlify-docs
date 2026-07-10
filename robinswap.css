@@ -1,0 +1,21 @@
+.rs-hero { position: relative; overflow: hidden; background: #070a06; color: #f4ffe0; }
+.rs-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .42; background: radial-gradient(circle at 24% 10%, #b8f84a 0, transparent 28%), radial-gradient(circle at 82% 70%, #47700b 0, transparent 32%); }
+.rs-hero > div { position: relative; }
+.rs-hero-mark { display: block; width: 3.5rem; height: 3.5rem; margin-bottom: 1.4rem; filter: drop-shadow(0 12px 24px rgba(184,248,74,.18)); }
+.rs-hero-badge { display: inline-flex; border: 1px solid rgba(184,248,74,.42); border-radius: 999px; padding: .3rem .75rem; color: #dfff9b; background: rgba(184,248,74,.1); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.rs-hero-title { margin-top: 1.75rem; max-width: 56rem; color: #f6ffe9; font-size: clamp(3.2rem, 8vw, 6.5rem); font-weight: 700; letter-spacing: -.065em; line-height: .92; }
+.rs-hero-title span { color: #b8f84a; }
+.rs-hero-copy { margin-top: 1.75rem; max-width: 40rem; color: #c8d2bd; font-size: 1.1rem; line-height: 1.8; }
+.rs-cta-primary, .rs-cta-secondary { display: inline-block; border-radius: .75rem; padding: .75rem 1.25rem; font-weight: 700; text-decoration: none !important; transition: transform .15s ease, background .15s ease, border .15s ease; }
+.rs-cta-primary { background: #b8f84a; color: #0a0e07 !important; }
+.rs-cta-secondary { border: 1px solid #708164; color: #f4ffe0 !important; }
+.rs-cta-primary:hover, .rs-cta-secondary:hover { transform: translateY(-1px); }
+.rs-cta-primary:hover { background: #d8ff81; }
+.rs-cta-secondary:hover { border-color: #b8f84a; }
+.rs-stage-card { border: 1px solid #dde4d5; border-radius: 1rem; padding: 1.25rem; }
+.dark .rs-stage-card { border-color: #292f26; }
+.rs-stage-card p, .rs-callout > p:first-child { margin: 0; color: #6fa80d; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.rs-stage-card h2 { margin: .75rem 0 0; font-size: 1.25rem; font-weight: 700; }
+.rs-stage-card span { display: block; margin-top: .5rem; color: #5f675b; font-size: .875rem; line-height: 1.55; }
+.dark .rs-stage-card span { color: #a4ada0; }
+.rs-callout { margin-top: 3.5rem; border: 1px solid rgba(111,168,13,.35); border-radius: 1rem; padding: 1.5rem; background: rgba(184,248,74,.08); }

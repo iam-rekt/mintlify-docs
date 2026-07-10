@@ -1,0 +1,55 @@
+---
+title: "Provide liquidity"
+description: "Create a V2 pair or a V3 range position, then manage it with the right expectations."
+---
+
+RobinSwap supports two liquidity models:
+
+| Model | Best for | Position form |
+| --- | --- | --- |
+| V2 | Simple, full-range liquidity | Fungible LP tokens |
+| V3 | Concentrated liquidity around a chosen price range | A non-fungible position NFT |
+
+## Add to an existing pool
+
+1. Open **Liquidity** and choose a pool, or use **Create**.
+2. Select your two assets. The interface displays wallet balances and enables **Max** only after a wallet is connected.
+3. Select V2 or V3. For a V3 pool, choose the fee tier and price range.
+4. Enter amounts. The interface calculates the other side for a balanced position where a pool price is available.
+5. Review the range chart, minimum amounts, approvals, and final transaction.
+
+## Initialize a new V3 pool
+
+A V3 pool must be initialized before the first position can be minted. The initial price is not a cosmetic field: it defines the starting price for the pool.
+
+<Warning>
+  Only initialize a pool when you understand the asset decimal relationship and the intended starting market price. An incorrect initial price can create an immediately mispriced pool.
+</Warning>
+
+For a new pool, RobinSwap asks for the fee tier and the initial price. The position manager creates/initializes the pool and mints the first position in the supported flow.
+
+## Choose a V3 range
+
+Your V3 liquidity is active only while the pool price sits inside the lower and upper bounds you choose.
+
+<Frame caption="The Liquidity page is where pools, TVL, volume, fees, and position creation come together.">
+  <img src="/images/Liquidity.png" alt="RobinSwap Liquidity page with live pool metrics, filters, and liquidity positions." />
+</Frame>
+
+- **Narrow range:** more concentrated capital and potentially more fees per dollar, but a greater chance of moving out of range.
+- **Wide range:** active across more price movement, generally with less concentration.
+- **Full range:** broadest coverage; behaves more like passive liquidity but is still a V3 NFT position.
+
+The range chart is the decision surface. It shows your bounds relative to the current price. If price leaves the range, the position stops earning swap fees until price returns or you adjust the range.
+
+## One-token deposits and zaps
+
+Balanced liquidity is the standard path. The optional zap flow is a convenience feature: it can swap part of a selected input asset into the other asset before adding liquidity, subject to price-impact and balance-error guards. It is optional, not a requirement for liquidity.
+
+Read the quote carefully: a zap adds a swap leg before the mint, so it has its own execution risk and can incur the configured convenience fee when enabled.
+
+## Manage a position
+
+Use **Portfolio** to inspect positions discovered for your connected wallet. V3 positions can expose range, current price, token composition, and accrued fees. When a range is no longer appropriate, use the range-edit flow to withdraw/reposition liquidity atomically where supported.
+
+<Card title="Manage positions in Portfolio" icon="wallet" href="/guides/portfolio">Learn how position discovery, fee collection, range edits, and the liquidity portfolio work.</Card>

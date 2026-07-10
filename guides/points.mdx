@@ -1,0 +1,35 @@
+---
+title: "Weekly points and referrals"
+description: "How RobinSwap records eligible activity and applies referral boosts."
+---
+
+RobinSwap points are an offchain participation program. There is no points token contract, no onchain claim balance, and no guarantee of future value.
+
+## Register once
+
+Connect the wallet you intend to use and sign the points registration message from the swap experience. The signature proves wallet control; it does not spend funds or grant token approvals.
+
+## Eligible activity
+
+The points service verifies confirmed RobinSwap transaction receipts against the configured factory contracts. The browser does not self-report action type, trade size, or a multiplier.
+
+The current baseline model is:
+
+| Activity | Base points |
+| --- | ---: |
+| Confirmed swap | 100 |
+| Confirmed liquidity action | 250 |
+
+Verified size can apply a weekly multiplier. Rules, thresholds, allocation totals, and dates are operator-controlled and can change for future weeks.
+
+## Referral names
+
+Set a unique referral name and share it with a new user. Referral attribution is one-time. The referred wallet can receive a points boost, while the referrer receives a points-only share of eligible invitee activity. No percentage of a user’s swap fee or LP fee is diverted through referrals.
+
+## Weekly distribution
+
+The program operator sets the total allocation for the week, then distributes it across verified activity under the active rules. Portfolio displays the recorded results after distribution.
+
+<Warning>
+  Do not sign messages you do not recognize. RobinSwap registration is a message signature only; a request to approve or transfer tokens is not points registration.
+</Warning>
