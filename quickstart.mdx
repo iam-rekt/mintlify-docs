@@ -1,46 +1,50 @@
 ---
-title: "Make your first RobinSwap trade"
-description: "A guided first swap on Robinhood Chain."
+title: "Quickstart"
+description: "Begin with a guide on the fastest path to a successful outcome"
 ---
 
-This tutorial takes you from a connected wallet to a confirmed swap. It uses the default Robinhood Chain route and does not require wrapped ETH in advance.
-
 <Info>
-  You need a wallet with Robinhood Chain enabled and enough ETH for network gas plus the token you intend to trade.
+  You need a wallet with Robinhood Chain enabled and enough ETH for gas plus the token you want to trade.
 </Info>
 
 <Steps>
   <Step title="Open RobinSwap and connect">
-    Go to [robinswap.finance](https://www.robinswap.finance) and choose **Connect wallet**. RobinSwap reads your active wallet address only after you approve the connection.
+    Go to [robinswap.finance](https://www.robinswap.finance) and choose **Connect wallet**. RobinSwap only reads your address after you approve.
   </Step>
   <Step title="Switch to Robinhood Chain">
-    The swap surface defaults to Robinhood Chain. If your wallet is elsewhere, use the switch prompt. The chain ID is `4663`.
+    The app defaults to Robinhood Chain (chain ID `4663`). If your wallet is on another network, accept the switch prompt.
   </Step>
-  <Step title="Choose what you are sending">
-    Select the **From** token and enter an amount. Native ETH is supported in the interface; RobinSwap handles wrapping only when the selected onchain route requires it.
+  <Step title="Pick your tokens">
+    Choose the **From** token and enter an amount, then choose the **To** token. You can search by symbol, name, or contract address. Always double-check imported token addresses.
   </Step>
-  <Step title="Choose what you want to receive">
-    Select the **To** token. Search the active network’s token list by symbol, name, or contract address. Always verify the address for imported tokens.
+  <Step title="Review the quote">
+    Check the expected output and **Minimum received**. The quote refreshes automatically as prices move.
   </Step>
-  <Step title="Review the live quote">
-    RobinSwap updates the quote when token or amount changes and refreshes it periodically. Review the expected output and **Minimum received** before proceeding.
-  </Step>
-  <Step title="Approve, then swap">
-    ERC-20 inputs may require a one-time approval. Confirm the approval, then confirm the swap transaction in your wallet. Native ETH does not need an ERC-20 approval.
+  <Step title="Approve and swap">
+    ERC-20 tokens need a one-time approval. Confirm the approval, then confirm the swap in your wallet. Native ETH skips the approval step.
   </Step>
 </Steps>
 
 <Check>
-  Once the receipt confirms, the output token balance updates in your wallet. Eligible RobinSwap activity can be recorded for weekly points after your one-time points registration signature.
+  When the transaction confirms, your new token balance appears in your wallet. Eligible activity counts toward weekly points once you complete the one-time points signature.
 </Check>
 
-## What happened onchain?
-
-For a RobinSwap pool, the router executes against the deployed V2 or V3 contracts. If no local pool can quote, the interface can use a supported routing provider while keeping the experience in one swap card. Read [how routing works](/guides/swap) before trading a route that is not local.
-
-## Next
+## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Understand the quote" icon="route" href="/guides/swap">Routes, minimum received, price impact, approvals, and bridge status.</Card>
-  <Card title="Provide liquidity" icon="chart-line" href="/guides/liquidity">Create a pool or add to an existing V2/V3 position.</Card>
+  <Card title="Swap guide" icon="arrow-right-arrow-left" href="/guides/swap">
+    Slippage, routing, approvals and how to read a quote.
+  </Card>
+
+  <Card title="Add liquidity" icon="chart-line" href="/guides/liquidity">
+    Provide liquidity in V2 or V3 pools and earn fees.
+  </Card>
+
+  <Card title="Manage your portfolio" icon="wallet" href="/guides/portfolio">
+    Track positions, collect fees and manage referrals.
+  </Card>
+
+  <Card title="Contract addresses" icon="file-contract" href="/reference/contracts">
+    Verified mainnet contracts and explorer links.
+  </Card>
 </CardGroup>

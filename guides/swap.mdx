@@ -1,66 +1,81 @@
 ---
-title: "Swap on RobinSwap"
-description: "Choose tokens, read a route, and execute a trade with a clear minimum output."
+title: "Swap"
+description: "How to trade tokens on RobinSwap with confidence."
+icon: "arrow-right-arrow-left"
 ---
 
-## Read the route before you sign
+Swapping on RobinSwap is designed to be simple: pick two tokens, review the quote, confirm in your wallet.
 
-The swap card treats every executable path as a RobinSwap quote. It favors a configured RobinSwap pool whenever that pool can quote within the routing guard. When a local pool is absent or its expected price impact is above the configured threshold, the interface can compare supported external paths by their guaranteed minimum output.
+<Frame caption="The swap card shows live quotes, price impact, and minimum received before you confirm.">
+  ![RobinSwap swap interface.](/images/Explore.png)
+</Frame>
 
-<Note>
-  A route is an execution plan, not a price promise. The minimum received is the amount protected by your configured slippage tolerance at transaction creation time.
-</Note>
+## Before you swap
 
-## Set up a swap
+- Your wallet is connected and set to **Robinhood Chain** (chain ID `4663`).
+- You have enough ETH for gas.
+- If you're trading an ERC-20 token, RobinSwap will ask for a one-time **approval** before the first trade of that token.
 
-1. Select a token and amount in **From**.
-2. Select the destination token in **To**. The list is isolated to the currently selected source network.
-3. Wait for the live quote to populate the output field.
-4. Open swap settings only if you need to change slippage tolerance.
-5. Check **Minimum received** and submit the approval or swap.
+## Reading a quote
 
-## Native ETH and WETH
+Every quote shows the key numbers you need before signing.
 
-Use **ETH** when you hold native ETH. You do not need to manually wrap it for normal RobinSwap interface flows. WETH is the pool-side representation used by V2/V3 contracts; the interface handles the required wrapping or unwrapping in supported transactions.
+<Frame>
+  ![RobinSwap swap interface showing a live quote.](/images/Explore.png)
+</Frame>
 
-## Local and external execution
+| Field | What it means |
+| --- | --- |
+| **Expected output** | The estimated amount you'll receive at current prices. |
+| **Minimum received** | The lowest amount the trade will execute at, based on your slippage setting. |
+| **Price impact** | How much your trade moves the pool price. Higher impact = worse rate. |
+| **Route** | Which pool(s) your trade goes through. |
+| **Network fee** | Gas paid to Robinhood Chain validators. |
 
-| Route type | When it is used | What to check |
-| --- | --- | --- |
-| RobinSwap V2/V3 | A local pool exists and quotes within the price-impact guard | Fee tier, minimum received, price impact |
-| Same-chain smart route | No local executable quote or a safer price is available | Minimum received and the destination contract |
-| RobinSwap Bridge | You start on another supported source network | Source network, Robinhood Chain destination, bridge status and final output |
-
-RobinSwap Bridge remains pending until settlement completes. RobinSwap keeps the route, destination, and completion state in the same swap flow; do not resend a transaction while a bridge is pending.
-
-## RobinSwap Bridge into Robinhood Chain
-
-RobinSwap Bridge is the cross-network experience inside the swap card. Start from a supported EVM network, select **Robinhood Chain** as the destination, and RobinSwap prepares one route into the token you selected there.
-
-1. Pick the network you are starting from.
-2. Keep **Robinhood Chain** as the destination.
-3. Choose the token you want to receive on Robinhood Chain and confirm the route.
-
-The route stays **Pending** while it settles. Wait for completion before starting another bridge for the same funds.
+<Tip>
+  If price impact is high (\>1-2%), try a smaller amount or split the trade.
+</Tip>
 
 ## Slippage
 
-Slippage is the maximum difference you accept between the quote and the final onchain execution. A smaller setting provides tighter price protection but can make volatile or thin-pool trades revert. A larger setting makes execution more likely but allows more adverse movement.
+Slippage is how much price movement you'll accept between quote and execution. The default is usually fine.
 
-<Warning>
-  Do not raise slippage just to force a route through. First verify the token, the pool liquidity, and the price impact. Imported tokens and low-liquidity pools require extra care.
-</Warning>
+- **0.1% - 0.5%** — Stable pairs and deep pools.
+- **0.5% - 1%** — Most trades.
+- **1%\+** — Volatile tokens or thin liquidity.
+
+Set slippage too low and your trade may fail. Too high and you risk a worse fill.
+
+## Approvals
+
+The first time you trade an ERC-20 token, you'll sign an approval so the router can move it. This is a one-time step per token. Native ETH does not need approval.
+
+## Confirming the swap
+
+1. Review the quote and minimum received.
+2. Click **Swap**.
+3. Confirm in your wallet.
+4. Wait for on-chain confirmation — usually seconds on Robinhood Chain.
+
+Your new balance updates automatically once the transaction confirms.
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="The output is blank">
-    Confirm both token addresses, a nonzero input amount, and the active network. A blank output can mean no supported route exists or the quote provider is temporarily unavailable.
+  <Accordion title="Transaction failed">
+    Usually one of: slippage too tight, insufficient gas, or the token has transfer restrictions. Try raising slippage slightly or reducing the amount.
   </Accordion>
-  <Accordion title="Why do I need an approval?">
-    ERC-20 tokens require permission for the router to transfer the input amount. Approvals and swaps are distinct wallet transactions unless the token/route supports a combined authorization flow.
+
+  <Accordion title="No route found">
+    There's no pool with enough liquidity for this pair. Try a different token, smaller size, or route through a common asset like ETH.
   </Accordion>
-  <Accordion title="Why did my transaction revert?">
-    The market may have moved beyond your minimum received, the allowance/balance may be insufficient, or a route provider’s transaction may have expired. Refresh the quote and review the wallet simulation message.
+
+  <Accordion title="Quote keeps changing">
+    Prices move. RobinSwap refreshes the quote to reflect current pool state. Lock it in by confirming quickly.
   </Accordion>
 </AccordionGroup>
+
+## Next
+
+<CardGroup cols={2}>
+</CardGroup>

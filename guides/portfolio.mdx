@@ -1,46 +1,64 @@
 ---
-title: "Manage your portfolio"
-description: "Inspect liquidity positions, collect fees, edit ranges, and understand what is onchain versus indexed."
+title: "Portfolio"
+description: "Track positions, fees, points and referrals in one place."
+icon: "wallet"
 ---
 
-Portfolio is wallet-specific. Connect the wallet that owns the position, then refresh positions on the active Robinhood Chain network.
+The **Portfolio** is your dashboard for everything you've done on RobinSwap — positions, fees, trade history, points and referrals in one view.
 
-<Frame caption="Portfolio keeps positions and weekly points in the same calm, readable surface.">
-  <img src="/images/Portfolio.png" alt="RobinSwap Portfolio page with weekly points and liquidity position area." />
+<Frame caption="Portfolio brings your positions, unclaimed fees, and activity together on one page.">
+  ![RobinSwap portfolio dashboard.](/images/Explore.png)
 </Frame>
 
-## What Portfolio can show
+## What you'll find
 
-- V3 position NFTs owned by the connected address.
-- Pool, fee tier, current price, chosen range, and in-range state.
-- Estimated liquidity composition and fees owed by the position manager.
-- V2 LP balances where they can be discovered from the selected pool set.
-- Points registration, weekly points, and referral information from the points service.
+<CardGroup cols={2}>
+  <Card title="Positions" icon="chart-line">
+    Every V2 and V3 position you hold, with live values and status.
+  </Card>
 
-## Adjust a V3 position
+  <Card title="Unclaimed fees" icon="coins">
+    Fees earned from trades in your pools. Collect anytime.
+  </Card>
 
-When price moves outside your active range, your position does not earn swap fees. Use **Adjust range** when you want to move the position around the current price. It is a deliberate liquidity-management action, not an automatic repair.
+  <Card title="Swap history" icon="clock-rotate-left">
+    Recent trades with links to Robinhood Chain explorer.
+  </Card>
 
-1. Open the position and inspect its current range versus the current price.
-2. Choose new bounds in the range chart.
-3. Review the token amounts that will be removed and reminted.
-4. Confirm the position-management transaction.
+  <Card title="Points & referrals" icon="star">
+    Weekly points from eligible activity, plus your referral link.
+  </Card>
+</CardGroup>
 
-The adjustment withdraws and remints the selected liquidity in the new range. The resulting V3 position can have a new token ID; Portfolio refreshes after confirmation.
+## Managing V3 positions
 
-## Collect fees
+Click any V3 position to see its range, current price, and status.
 
-V3 fee amounts are accounted by the position manager. “Recorded owed” refers to tokens currently claimable by that position, not an offchain reward balance. Fees may be zero when no swaps accrued in range or if fees have already been collected.
+- **In range** — Actively earning fees.
+- **Out of range** — Not earning; sitting in one asset.
 
-## Points and referrals
+From the position view you can:
 
-Points are offchain program accounting, not a transferable token and not a smart-contract balance.
+- **Collect fees** without touching the underlying liquidity.
+- **Increase liquidity** to add more to the same range.
+- **Remove liquidity** to withdraw partially or fully.
 
-- Sign once from the home/swap experience to register the wallet for points tracking.
-- Confirmed swaps and liquidity activity are verified from transaction receipts.
-- Weekly allocation is performed by the program operator according to the active rules.
-- Referral names provide a points-only boost after one-time attribution; they do not redirect protocol swap or LP fees.
+<Tip>
+  To change a V3 range, remove the position and open a new one with your desired bounds.
+</Tip>
 
-<Info>
-  Points values can be delayed while activity is confirmed and the weekly distribution is prepared. They should never be treated as a claim on protocol assets.
-</Info>
+## Points
+
+Eligible activity (swaps, liquidity provision) can earn weekly points after you complete the one-time **points registration** signature. This is a free signature — no gas, no on-chain transaction.
+
+Check your point total and current week's progress from the Portfolio page.
+
+## Referrals
+
+Share your referral link to earn a share of points from users you bring in. Your link and stats are on the Portfolio page.
+
+## Next
+
+<CardGroup cols={2}>
+   
+</CardGroup>

@@ -1,55 +1,134 @@
 ---
-title: "Provide liquidity"
-description: "Create a V2 pair or a V3 range position, then manage it with the right expectations."
+title: "Liquidity"
+description: "Earn fees by providing liquidity to RobinSwap pools."
+icon: "chart-line"
 ---
 
-RobinSwap supports two liquidity models:
+When you add liquidity, you deposit two tokens into a pool. Every time someone swaps through that pool, a fee is charged — and a share of that fee accrues to you.
 
-| Model | Best for | Position form |
-| --- | --- | --- |
-| V2 | Simple, full-range liquidity | Fungible LP tokens |
-| V3 | Concentrated liquidity around a chosen price range | A non-fungible position NFT |
+RobinSwap supports two pool types: **V2** (simple) and **V3** (concentrated).
 
-## Add to an existing pool
-
-1. Open **Liquidity** and choose a pool, or use **Create**.
-2. Select your two assets. The interface displays wallet balances and enables **Max** only after a wallet is connected.
-3. Select V2 or V3. For a V3 pool, choose the fee tier and price range.
-4. Enter amounts. The interface calculates the other side for a balanced position where a pool price is available.
-5. Review the range chart, minimum amounts, approvals, and final transaction.
-
-## Initialize a new V3 pool
-
-A V3 pool must be initialized before the first position can be minted. The initial price is not a cosmetic field: it defines the starting price for the pool.
-
-<Warning>
-  Only initialize a pool when you understand the asset decimal relationship and the intended starting market price. An incorrect initial price can create an immediately mispriced pool.
-</Warning>
-
-For a new pool, RobinSwap asks for the fee tier and the initial price. The position manager creates/initializes the pool and mints the first position in the supported flow.
-
-## Choose a V3 range
-
-Your V3 liquidity is active only while the pool price sits inside the lower and upper bounds you choose.
-
-<Frame caption="The Liquidity page is where pools, TVL, volume, fees, and position creation come together.">
-  <img src="/images/Liquidity.png" alt="RobinSwap Liquidity page with live pool metrics, filters, and liquidity positions." />
+<Frame caption="The Pools view shows every position, its status, and unclaimed fees at a glance.">
+  ![RobinSwap pools and liquidity view.](/images/Explore.png)
 </Frame>
 
-- **Narrow range:** more concentrated capital and potentially more fees per dollar, but a greater chance of moving out of range.
-- **Wide range:** active across more price movement, generally with less concentration.
-- **Full range:** broadest coverage; behaves more like passive liquidity but is still a V3 NFT position.
+## V2 vs V3 — which one?
 
-The range chart is the decision surface. It shows your bounds relative to the current price. If price leaves the range, the position stops earning swap fees until price returns or you adjust the range.
+<CardGroup cols={2}>
+  <Card title="V2 pools" icon="circle">
+    Deposit two tokens in equal value. Your liquidity spreads across all prices. Simple, passive, no management needed.
+  </Card>
 
-## One-token deposits and zaps
+  <Card title="V3 pools" icon="chart-simple">
+    Pick a **price range**. Your liquidity is concentrated there, earning more fees when the price is inside your range — and none when it's outside.
+  </Card>
+</CardGroup>
 
-Balanced liquidity is the standard path. The optional zap flow is a convenience feature: it can swap part of a selected input asset into the other asset before adding liquidity, subject to price-impact and balance-error guards. It is optional, not a requirement for liquidity.
+<Tip>
+  New to LP? Start with V2. Comfortable managing ranges? V3 can earn more on the same capital.
+</Tip>
 
-Read the quote carefully: a zap adds a swap leg before the mint, so it has its own execution risk and can incur the configured convenience fee when enabled.
+## Adding V2 liquidity
 
-## Manage a position
+<Steps>
+  <Step title="Open Pools">
+    Go to the **Pools** page and choose **New position**.
+  </Step>
+  <Step title="Pick your pair">
+    Select two tokens. If the pool doesn't exist yet, you'll be prompted to create it and set the initial price.
+  </Step>
+  <Step title="Enter an amount">
+    Enter one side — the other fills automatically based on the current pool ratio.
+  </Step>
+  <Step title="Approve and deposit">
+    Approve each token (one-time), then confirm the deposit.
+  </Step>
+</Steps>
 
-Use **Portfolio** to inspect positions discovered for your connected wallet. V3 positions can expose range, current price, token composition, and accrued fees. When a range is no longer appropriate, use the range-edit flow to withdraw/reposition liquidity atomically where supported.
+You'll receive LP tokens representing your share of the pool.
 
-<Card title="Manage positions in Portfolio" icon="wallet" href="/guides/portfolio">Learn how position discovery, fee collection, range edits, and the liquidity portfolio work.</Card>
+## Adding V3 liquidity
+
+<Steps>
+  <Step title="Pick a fee tier">
+    Fee tiers match volatility. Lower fees for stable pairs, higher fees for volatile ones.
+  </Step>
+  <Step title="Set your price range">
+    Choose a **min** and **max** price. Your liquidity earns fees only while the market price is inside this range.
+  </Step>
+  <Step title="Deposit tokens">
+    Deposit amounts of both tokens matching your chosen range. Narrower ranges = higher capital efficiency, but more time out-of-range.
+  </Step>
+  <Step title="Confirm">
+    Approve and confirm. Your position appears in your portfolio.
+  </Step>
+</Steps>
+
+## Understanding risk
+
+<Warning>
+  Providing liquidity is not risk-free.
+</Warning>
+
+- **Impermanent loss** — If one token moves significantly against the other, you may end up with less value than if you'd just held them.
+- **Out-of-range (V3)** — If price leaves your range, your position stops earning fees and holds only one asset.
+- **Token risk** — Always verify token contract addresses before depositing.
+
+## How you earn
+
+Every swap in a pool pays the pool's fee. That fee is split among LPs in proportion to their share of the active liquidity.
+
+- **V2** — every LP earns on every swap, proportional to pool share.
+- **V3** — only LPs whose range includes the current price earn from that swap. Fees accumulate as claimable balances.
+
+<Tip>
+  Fees don't auto-compound — they sit as claimable amounts until you collect or reinvest them.
+</Tip>
+
+## Adjusting your position
+
+Open any position from **Pools** or **Portfolio** to manage it.
+
+<AccordionGroup>
+  <Accordion title="Add more liquidity">
+    Deposit additional tokens into an existing V2 position, or add to the same range on a V3 position.
+  </Accordion>
+
+  <Accordion title="Remove liquidity">
+    Withdraw partially (by percentage) or fully. Fully exiting a V3 position burns its NFT.
+  </Accordion>
+
+  <Accordion title="Change a V3 range">
+    Ranges are fixed once created. To move a V3 range: **remove** the position, then **open a new one** with new min/max prices. Collect fees first so they don't get bundled into the withdrawal.
+  </Accordion>
+
+  <Accordion title="Rebalance after big price moves">
+    If price leaves your V3 range, the position stops earning. Either wait for it to come back, or close and reopen around the new price.
+  </Accordion>
+</AccordionGroup>
+
+## Claiming fees
+
+Fees are separate from your deposited liquidity — you can claim them without touching the position.
+
+<Steps>
+  <Step title="Open the position">
+    Click any position on the **Pools** page or **Portfolio**.
+  </Step>
+  <Step title="Check unclaimed fees">
+    The card shows fees earned in each token since your last claim.
+  </Step>
+  <Step title="Collect">
+    Click **Collect fees** and confirm in your wallet. Tokens land in your wallet.
+  </Step>
+</Steps>
+
+<Info>
+  Collecting fees costs gas. Batch collections rather than claiming tiny amounts frequently.
+</Info>
+
+## Next
+
+<CardGroup cols={2}>
+   
+</CardGroup>

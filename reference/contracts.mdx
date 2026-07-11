@@ -1,47 +1,60 @@
 ---
-title: "Mainnet contract reference"
-description: "RobinSwap contracts deployed on Robinhood Chain mainnet (chain ID 4663)."
+title: "Contracts"
+description: "Deployed RobinSwap contracts on Robinhood Chain."
+icon: "file-contract"
 ---
 
-These are the current RobinSwap mainnet deployment addresses.
+All RobinSwap contracts are deployed on **Robinhood Chain** (chain ID `4663`).
+
+<Warning>
+  Always verify addresses against this page and the block explorer before signing any transaction.
+</Warning>
+
+## Network
+
+|  |  |
+| --- | --- |
+| **Network** | Robinhood Chain |
+| **Chain ID** | `4663` |
+| **Native token** | ETH |
 
 ## Core contracts
 
-| Component | Address |
+<Info>
+  Addresses will be added here as they are finalized.
+</Info>
+
+### V2
+
+| Contract | Address |
 | --- | --- |
-| V3 Factory | [`0xea561e058313b96011e5070ca7d0f027a44e3748`](https://robinhoodchain.blockscout.com/address/0xea561e058313b96011e5070ca7d0f027a44e3748) |
-| V3 SwapRouter | [`0x7BeF1E8C941310B457FEA16F860E42dBF62EC9bE`](https://robinhoodchain.blockscout.com/address/0x7BeF1E8C941310B457FEA16F860E42dBF62EC9bE) |
-| V3 QuoterV2 | [`0x3C83eF839884118a3Acf29FD18cB393EF9D429f9`](https://robinhoodchain.blockscout.com/address/0x3C83eF839884118a3Acf29FD18cB393EF9D429f9) |
-| V3 Position Manager | [`0xd359160448B011dC1AAAF9C166e2e13bb414e6b3`](https://robinhoodchain.blockscout.com/address/0xd359160448B011dC1AAAF9C166e2e13bb414e6b3) |
-| Position Descriptor | [`0xb33fF27feD8A45e7273991439de92D972575956a`](https://robinhoodchain.blockscout.com/address/0xb33fF27feD8A45e7273991439de92D972575956a) |
-| V2 Factory | [`0xa95DA9b9fCef09A07F99444fE9304457d6ECdccA`](https://robinhoodchain.blockscout.com/address/0xa95DA9b9fCef09A07F99444fE9304457d6ECdccA) |
-| V2 Router02 | [`0x673E66027a2F01D224E82a0f81e082d6EFe0527C`](https://robinhoodchain.blockscout.com/address/0x673E66027a2F01D224E82a0f81e082d6EFe0527C) |
+| Factory | _coming soon_ |
+| Router | _coming soon_ |
 
-## Helpers and infrastructure
+### V3
 
-| Component | Address |
+| Contract | Address |
 | --- | --- |
-| V3Utils | [`0x8B355da9Aa3a4fEfE4b6ECb14591D985ec9b853F`](https://robinhoodchain.blockscout.com/address/0x8B355da9Aa3a4fEfE4b6ECb14591D985ec9b853F) |
-| BatchClaim | [`0xFC0d99c5B5A42b7A47cb9223529c914F51285F02`](https://robinhoodchain.blockscout.com/address/0xFC0d99c5B5A42b7A47cb9223529c914F51285F02) |
-| Wrapped native ETH | [`0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73`](https://robinhoodchain.blockscout.com/address/0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73) |
-| Permit2 (shared infrastructure) | [`0x000000000022D473030F116dDEE9F6B43aC78BA3`](https://robinhoodchain.blockscout.com/address/0x000000000022D473030F116dDEE9F6B43aC78BA3) |
-| Multicall (shared infrastructure) | [`0x2cAC2D899eCC914d704FeaAE33ac1bF36277DaD1`](https://robinhoodchain.blockscout.com/address/0x2cAC2D899eCC914d704FeaAE33ac1bF36277DaD1) |
+| Factory | _coming soon_ |
+| Router | _coming soon_ |
+| Position Manager | _coming soon_ |
+| Quoter | _coming soon_ |
 
-## V3 fee tiers
+## Fee tiers (V3)
 
-| Fee tier | Tick spacing |
-| ---: | ---: |
-| 0.01% | 1 |
-| 0.05% | 10 |
-| 0.25% | 50 |
-| 0.30% | 60 |
-| 1.00% | 200 |
+| Tier | Best for |
+| --- | --- |
+| 0.01% | Stable / pegged pairs |
+| 0.05% | Correlated pairs |
+| 0.30% | Standard pairs |
+| 1.00% | Exotic / volatile pairs |
 
-## Deployment evidence
+## Verifying a contract
 
-- Network: Robinhood Chain mainnet, `4663`
-- Start block: `6027468`
-- V3 pool init-code hash: `0x7ef2b01a451cbf890790278981756372e549443802ece149dc0b592cbc114ee9`
-- V2 pair init-code hash: `0x15199d86797be90b76cf08499ec5188326ca1bd46d1789d9a6c94a52ded67260`
+1. Copy the address from this page.
+2. Open the [Robinhood Chain explorer](https://www.robinswap.finance).
+3. Confirm the contract is verified and matches the source code.
 
-Use the linked block explorer pages to inspect the current contracts and their onchain activity.
+## Reporting issues
+
+Found a discrepancy or suspicious contract? Reach out via [X](https://x.com/robinswap).

@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "RobinSwap Docs",
+  "name": "RobinSwap",
   "description": "The operating manual for Robinhood Chain liquidity.",
   "seo": {
     "metatags": {
@@ -38,7 +38,32 @@
         { "anchor": "App", "href": "https://www.robinswap.finance", "icon": "arrow-up-right-from-square" },
         { "anchor": "Explore", "href": "https://www.robinswap.finance/#explore", "icon": "chart-line" }
       ]
-    }
+    },
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "index",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "Guides",
+        "icon": "book",
+        "pages": [
+          "guides/swap",
+          "guides/liquidity",
+          "guides/portfolio"
+        ]
+      },
+      {
+        "group": "Reference",
+        "icon": "code",
+        "pages": [
+          "reference/contracts"
+        ]
+      }
+    ]
   },
   "navbar": {
     "links": [
