@@ -64,16 +64,6 @@ You'll receive LP tokens representing your share of the pool.
   </Step>
 </Steps>
 
-## Understanding risk
-
-<Warning>
-  Providing liquidity is not risk-free.
-</Warning>
-
-- **Impermanent loss** — If one token moves significantly against the other, you may end up with less value than if you'd just held them.
-- **Out-of-range (V3)** — If price leaves your range, your position stops earning fees and holds only one asset.
-- **Token risk** — Always verify token contract addresses before depositing.
-
 ## How you earn
 
 Every swap in a pool pays the pool's fee. That fee is split among LPs in proportion to their share of the active liquidity.
@@ -101,10 +91,6 @@ Open any position from **Pools** or **Portfolio** to manage it.
   <Accordion title="Change a V3 range">
     Ranges are fixed once created. To move a V3 range: **remove** the position, then **open a new one** with new min/max prices. Collect fees first so they don't get bundled into the withdrawal.
   </Accordion>
-
-  <Accordion title="Rebalance after big price moves">
-    If price leaves your V3 range, the position stops earning. Either wait for it to come back, or close and reopen around the new price.
-  </Accordion>
 </AccordionGroup>
 
 ## Claiming fees
@@ -130,5 +116,4 @@ Fees are separate from your deposited liquidity — you can claim them without t
 ## Next
 
 <CardGroup cols={2}>
-   
 </CardGroup>
