@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "tsc -b --pretty false",
     "preview": "vite preview",
+    "render:og": "node scripts/render-og.mjs",
     "qa": "node scripts/qa.mjs"
   },
   "dependencies": {
