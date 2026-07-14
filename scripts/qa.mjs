@@ -30,7 +30,7 @@ try {
   page.on("pageerror", (error) => runtimeErrors.push(error.message));
 
   const routes = [
-    ["/", "Markets move"],
+    ["/", "Know what happens"],
     ["/quickstart", "Your first swap"],
     ["/guides/swap", "Swap"],
     ["/guides/liquidity", "Liquidity"],
@@ -42,6 +42,13 @@ try {
 
   await page.goto(`${origin}/`, { waitUntil: "domcontentloaded" });
   await page.screenshot({ path: "/tmp/robinswap-docs-desktop.png", fullPage: true });
+
+  await page.goto(`${origin}/guides/liquidity`, { waitUntil: "networkidle" });
+  const walkthroughImages = page.locator(".walkthrough-figure img");
+  check((await walkthroughImages.count()) === 3, "liquidity guide renders add, withdraw, and range walkthroughs");
+  const imageHealth = await walkthroughImages.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0));
+  check(imageHealth, "liquidity walkthrough images load successfully");
+  await page.screenshot({ path: "/tmp/robinswap-docs-liquidity.png", fullPage: true });
 
   await page.getByRole("button", { name: /search documentation/i }).click();
   const search = page.getByPlaceholder(/search robinswap docs/i);
@@ -67,13 +74,14 @@ try {
   mobile.setDefaultTimeout(8_000);
   const mobileErrors = [];
   mobile.on("pageerror", (error) => mobileErrors.push(error.message));
-  await inspectPage(mobile, "/", "Markets move");
+  await inspectPage(mobile, "/", "Know what happens");
   await mobile.getByRole("button", { name: /open navigation/i }).click();
   check(await mobile.locator(".sidebar.is-open").isVisible(), "mobile navigation opens");
   await mobile.locator('.sidebar a[href="/guides/swap"]').click();
   check(mobile.url().includes("/guides/swap"), "mobile navigation opens the swap guide");
   await mobile.screenshot({ path: "/tmp/robinswap-docs-mobile.png", fullPage: true });
   await inspectPage(mobile, "/guides/liquidity", "Liquidity");
+  await mobile.screenshot({ path: "/tmp/robinswap-docs-liquidity-mobile.png", fullPage: true });
   check(mobileErrors.length === 0, `mobile runtime has no errors${mobileErrors.length ? `: ${mobileErrors.join(" | ")}` : ""}`);
   await mobileContext.close();
 } finally {

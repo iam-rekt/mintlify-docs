@@ -1,13 +1,13 @@
 ---
 title: "Portfolio"
-description: "Track value, manage liquidity, claim fees, and review points in one place."
+description: "Track value, manage liquidity, claim fees, and review activity in one place."
 icon: "wallet"
 ---
 
-Portfolio is the control room for the connected wallet: position value, active ranges, accrued fees, recent onchain activity, and weekly points.
+Portfolio is the control room for the connected wallet: position value, active ranges, accrued fees, and recent onchain activity.
 
-<Frame caption="Portfolio separates current value, position status, points, and migration tools.">
-  ![RobinSwap portfolio dashboard.](/images/Portfolio.png)
+<Frame caption="Portfolio summarizes priced value, active positions, earning status, and each position's share of capital.">
+  ![RobinSwap liquidity portfolio overview.](/images/portfolio-overview-light.png)
 </Frame>
 
 ## What you'll find
@@ -25,9 +25,6 @@ Portfolio is the control room for the connected wallet: position value, active r
     Recent indexed swaps and liquidity actions, with explorer links.
   </Card>
 
-  <Card title="Points & referrals" icon="star">
-    Weekly score, recorded activity, referral name, and invite status.
-  </Card>
 </CardGroup>
 
 ## Managing V3 positions
@@ -40,21 +37,13 @@ Click any V3 position to see its range, current price, and status.
 From a V3 position card you can:
 
 - **Collect fees** without touching the underlying liquidity.
+- **Add liquidity** at the position's current fee tier and range.
+- **Reduce / withdraw** part or all of the position into both pool assets.
 - **Edit range** to move the capital into new bounds.
 - **Zap out** to withdraw, collect, and receive one asset.
 
 ## Bring liquidity over
 
 The migration panel finds compatible Uniswap V3 positions automatically and supports Uniswap V2 lookup by pair address. Migration has no RobinSwap migration fee and includes price-deviation protection.
-
-## Points and referrals
-
-Eligible activity can be recorded for weekly points only after you complete the one-time **points registration** signature. It is a wallet signature, not an approval or onchain transaction.
-
-Check your point total and current week's progress from the Portfolio page.
-
-## Referrals
-
-Referral attribution is set once for a new wallet. Referral rewards, eligibility, and weekly allocations are program rules, not a share of a user’s trading or LP fees.
 
 <Card title="Liquidity guide" icon="chart-line" href="/guides/liquidity">Add, adjust, and collect from V2 and V3 positions.</Card>

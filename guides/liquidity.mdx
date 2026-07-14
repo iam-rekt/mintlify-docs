@@ -1,6 +1,6 @@
 ---
 title: "Liquidity"
-description: "Create, zap, migrate, and adjust RobinSwap liquidity positions."
+description: "Create a position, then add, withdraw, or reshape it with clear previews."
 icon: "chart-no-axes-combined"
 ---
 
@@ -48,6 +48,10 @@ RobinSwap supports two pool types: **V2** (simple) and **V3** (concentrated).
   </Step>
 </Steps>
 
+<Frame caption="Choose V2 or V3, balanced tokens or a one-token zap, then select the pool fee.">
+  ![RobinSwap choose how to provide panel.](/images/create-liquidity.png)
+</Frame>
+
 V2 returns fungible LP tokens. V3 creates a position NFT containing the pair, fee tier, liquidity, and range.
 
 ## Single-token V3 deposit
@@ -57,6 +61,24 @@ Choose **One token** to zap a single asset into a V3 position. RobinSwap quotes 
 <Warning>
   A zap is not a way around thin liquidity. Reduce the amount or widen the range if the protected quote cannot balance the position safely.
 </Warning>
+
+## Add to an existing position
+
+Open a V3 position in Portfolio, choose **Add / remove**, and stay on **Add liquidity**. Enter either token or use **Max**; the second amount follows the position's live ratio.
+
+<Frame caption="Balances and Max are shown for both tokens before the position is increased.">
+  ![RobinSwap add liquidity to an existing V3 position.](/images/manage-add.png)
+</Frame>
+
+## Reduce or withdraw
+
+Switch to **Reduce / withdraw**, select 25%, 50%, 75%, or Full, then review the estimated principal. A direct withdrawal returns both pool tokens and does not perform a zap.
+
+<Frame caption="A full withdrawal returns both pool assets and collects available position fees.">
+  ![RobinSwap reduce or withdraw liquidity panel.](/images/manage-withdraw.png)
+</Frame>
+
+Choose **Zap out** only when you want a full V3 position converted into one selected asset. Native ETH can be selected when the output is WETH.
 
 ## How you earn
 
@@ -71,11 +93,11 @@ Open any position from **Pools** or **Portfolio** to manage it.
 
 Open the position in Portfolio and choose **Edit range**. Pick new bounds and review the amounts. RobinSwap removes the old liquidity and mints the replacement position; wallets that support atomic batches can submit the flow together, while other wallets may show separate confirmations.
 
+<Frame caption="The shaded band is the new earning range; the market marker shows where the current pool price sits.">
+  ![RobinSwap V3 liquidity range editor.](/images/range-editor-detail.png)
+</Frame>
+
 An out-of-range position is held in one asset and no longer earns fees. Moving the range can put it back to work, but it also changes your exposure.
-
-## Zap out
-
-Choose **Zap out** on a V3 position to remove the full position, collect its fees, and receive one selected asset. Native ETH can be selected when the output is WETH.
 
 ## Move existing liquidity
 

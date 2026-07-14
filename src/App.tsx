@@ -41,6 +41,9 @@ const SEARCH_ITEMS = [
   { href: "/guides/swap" as Route, title: "Swap and bridge", text: "Expected output, minimum received, slippage, approvals, and cross-chain settlement." },
   { href: "/guides/liquidity" as Route, title: "V2 and V3 liquidity", text: "Create a pool, set a concentrated range, zap one token, migrate liquidity, and claim fees." },
   { href: "/guides/liquidity" as Route, title: "Single-token zap", text: "Deposit one token into a V3 position with protected internal routing." },
+  { href: "/guides/liquidity" as Route, title: "Add to a position", text: "Increase an existing V3 position at its current fee tier and earning range." },
+  { href: "/guides/liquidity" as Route, title: "Reduce or withdraw liquidity", text: "Withdraw part or all of a V3 position directly into both pool tokens." },
+  { href: "/guides/liquidity" as Route, title: "Adjust a liquidity range", text: "Move V3 bounds with the range chart and preview the new position before signing." },
   { href: "/guides/liquidity" as Route, title: "Move existing liquidity", text: "Migrate compatible Uniswap V2 and V3 positions without a RobinSwap migration fee." },
   { href: "/guides/portfolio" as Route, title: "Portfolio", text: "Track V2 shares, V3 positions, ranges, fees, and activity." },
   { href: "/reference/contracts" as Route, title: "Contracts", text: "RobinSwap V2 and V3 deployment addresses on Robinhood Chain." },
@@ -198,25 +201,39 @@ function CardGrid({ items }: { items: { title: string; text: string; href?: Rout
   return <div className="card-grid">{items.map((item) => item.href ? <Link href={item.href} key={item.title} className="doc-card"><strong>{item.title}</strong><p>{item.text}</p><Icon name="arrow" size={17} /></Link> : <div className="doc-card" key={item.title}><strong>{item.title}</strong><p>{item.text}</p></div>)}</div>;
 }
 
-function Figure({ src, alt, caption }: { src: string; alt: string; caption: string }) {
-  return <figure className="doc-figure"><img src={src} alt={alt} loading="lazy" /><figcaption>{caption}</figcaption></figure>;
+function Figure({ src, darkSrc, alt, caption, className = "" }: { src: string; darkSrc?: string; alt: string; caption: string; className?: string }) {
+  return <figure className={`doc-figure ${className}`.trim()}>
+    <img className={darkSrc ? "figure-light" : undefined} src={src} alt={alt} loading="lazy" />
+    {darkSrc ? <img className="figure-dark" src={darkSrc} alt={alt} loading="lazy" /> : null}
+    <figcaption>{caption}</figcaption>
+  </figure>;
+}
+
+function VisualStep({ number, title, text, src, alt, caption }: { number: string; title: string; text: string; src: string; alt: string; caption: string }) {
+  return <div className="visual-step">
+    <div className="visual-step-copy"><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div></div>
+    <Figure src={src} alt={alt} caption={caption} className="walkthrough-figure" />
+  </div>;
 }
 
 function Overview() {
   return (
     <div className="overview">
       <section className="overview-hero">
-        <div><p className="hero-kicker">RobinSwap field guide · Robinhood Chain</p><h1>Markets move.<br/><em>You stay oriented.</em></h1><span>Trade, provide liquidity, and track every position from one clear market interface.</span><div className="hero-actions"><Link href="/quickstart">Make a first swap <Icon name="arrow" size={16}/></Link><Link href="/guides/liquidity">Explore liquidity</Link></div></div>
-        <div className="range-instrument" aria-label="Active V3 liquidity range illustration"><div className="range-caption"><span>Liquidity range</span><strong>Active</strong></div><div className="range-plot"><i className="range-axis"/><i className="range-active"/><i className="range-price"/></div><div className="range-labels"><span>Min</span><span>Market</span><span>Max</span></div></div>
+        <div><p className="hero-kicker">RobinSwap documentation</p><h1>Know what happens<br/><em>before you sign.</em></h1><span>Short, visual guides for trading, providing liquidity, and managing positions on Robinhood Chain.</span><div className="hero-actions"><Link href="/quickstart">Make a first swap <Icon name="arrow" size={16}/></Link><Link href="/guides/liquidity">Manage liquidity</Link></div></div>
+        <div className="home-path" aria-label="RobinSwap documentation paths">
+          <div><span>01</span><strong>Trade</strong><small>Read the quote and its protection.</small></div>
+          <div><span>02</span><strong>Provide</strong><small>Choose a pool, fee, and range.</small></div>
+          <div><span>03</span><strong>Manage</strong><small>Add, withdraw, adjust, and claim.</small></div>
+        </div>
       </section>
-      <div className="guide-strip"><div><strong>Trade</strong><span>Local and cross-chain routes.</span></div><div><strong>Provide</strong><span>Balanced deposits or one token.</span></div><div><strong>Manage</strong><span>Ranges, fees, and activity.</span></div></div>
-      <section className="overview-section"><div className="section-heading"><p>Choose a starting point</p><h2>Use the docs like the product.</h2></div><CardGrid items={[
+      <section className="overview-section"><div className="section-heading"><p>Choose a task</p><h2>Go directly to the action.</h2></div><CardGrid items={[
         { title: "First swap", text: "Connect, read the quote, and confirm with confidence.", href: "/quickstart" },
         { title: "Swap and bridge", text: "Understand settlement, slippage, and approvals.", href: "/guides/swap" },
-        { title: "Put assets to work", text: "Choose V2 or V3, set a range, zap, or migrate.", href: "/guides/liquidity" },
-        { title: "Manage a position", text: "Edit ranges, zap out, and claim LP fees.", href: "/guides/portfolio" },
+        { title: "Provide liquidity", text: "Choose V2 or V3, set a range, zap, or migrate.", href: "/guides/liquidity" },
+        { title: "Manage a position", text: "Add, withdraw, edit ranges, and claim LP fees.", href: "/guides/portfolio" },
       ]}/></section>
-      <section className="overview-section market-preview"><div className="section-heading"><p>See before you act</p><h2>Market context stays beside the action.</h2><span>Pool size, volume, fees, and the quote share one frame.</span></div><Figure src="/images/hero-1.png" alt="RobinSwap Trade page with market chart and swap card" caption="The current RobinSwap Trade view." /></section>
+      <section className="overview-section market-preview"><div className="section-heading"><p>Visual walkthroughs</p><h2>The interface, explained in context.</h2><span>Each guide uses the real product so labels, ranges, and confirmations are easy to recognize when you act.</span><Link href="/guides/liquidity" className="inline-guide-link">Open the liquidity walkthrough <Icon name="arrow" size={15}/></Link></div><Figure src="/images/range-editor-detail.png" alt="RobinSwap V3 range editor" caption="Adjust a V3 range against the live pool view before confirming." /></section>
     </div>
   );
 }
@@ -255,8 +272,8 @@ function SwapGuide() {
 }
 
 function LiquidityGuide() {
-  const toc = [{ id: "styles", label: "Pool styles" }, { id: "create", label: "Create a position" }, { id: "zap", label: "Single-token zap" }, { id: "earn", label: "How LPs earn" }, { id: "adjust", label: "Adjust a range" }, { id: "migrate", label: "Move liquidity" }, { id: "claim", label: "Claim fees" }];
-  return <Page eyebrow="Provide" title="Liquidity" description="Create, zap, migrate, and adjust RobinSwap liquidity positions." toc={toc}>
+  const toc = [{ id: "styles", label: "Pool styles" }, { id: "create", label: "Create a position" }, { id: "zap", label: "Single-token zap" }, { id: "add", label: "Add to a position" }, { id: "withdraw", label: "Reduce or withdraw" }, { id: "adjust", label: "Adjust a range" }, { id: "earn", label: "How LPs earn" }, { id: "migrate", label: "Move liquidity" }, { id: "claim", label: "Claim fees" }];
+  return <Page eyebrow="Provide" title="Liquidity" description="Create a position, then add, withdraw, or reshape it with clear previews." toc={toc}>
     <Figure src="/images/Liquidity.png" alt="RobinSwap liquidity directory" caption="Compare pool size, 24-hour flow, LP fees, estimated APR, and age." />
     <Section id="styles" title="Pick a pool style"><CardGrid items={[{ title: "V2 pools", text: "Deposit two assets at the current pool ratio. Liquidity remains active across the full price curve." }, { title: "V3 pools", text: "Choose a minimum and maximum price. The position earns while the market stays inside that range." }]}/><Note kind="tip">V2 is simpler to maintain. V3 offers more control, but a narrower range can move out of range sooner.</Note></Section>
     <Section id="create" title="Create a position"><Steps items={[
@@ -265,10 +282,12 @@ function LiquidityGuide() {
       { title: "Enter the deposit", text: "For a balanced position, enter one side and RobinSwap calculates the other from the pool and range." },
       { title: "Shape a V3 range", text: "Drag or type the bounds. Use chart zoom to inspect the surrounding market." },
       { title: "Approve and deposit", text: "Approve the required token amounts, then review the final wallet confirmation." },
-    ]}/></Section>
+    ]}/><Figure src="/images/create-liquidity.png" alt="RobinSwap choose how to provide panel" caption="Choose V2 or V3, balanced tokens or a one-token zap, then select the pool fee." className="product-panel" /></Section>
     <Section id="zap" title="Single-token V3 deposit"><p>Choose <strong>One token</strong> to turn a single asset into a V3 position. RobinSwap quotes the internal swap, checks its estimated impact, and deposits both sides into the selected range.</p><Note kind="warning">A zap is not a way around thin liquidity. Reduce the amount or widen the range if the protected quote cannot balance the position safely.</Note></Section>
+    <Section id="add" title="Add to an existing position"><VisualStep number="01" title="Keep the same range" text="Open a V3 position in Portfolio, choose Add / remove, and stay on Add liquidity. Enter either token or use Max; the second amount follows the position’s live ratio." src="/images/manage-add.png" alt="RobinSwap add liquidity to an existing V3 position" caption="Balances and Max are shown for both tokens before the position is increased." /></Section>
+    <Section id="withdraw" title="Reduce or withdraw"><VisualStep number="02" title="Choose how much to remove" text="Switch to Reduce / withdraw, select 25%, 50%, 75%, or Full, then review the estimated principal. A direct withdrawal returns both pool tokens and does not perform a zap." src="/images/manage-withdraw.png" alt="RobinSwap reduce or withdraw liquidity panel" caption="A full withdrawal returns both pool assets and collects available position fees." /><h3>Receive one token instead</h3><p>Choose <strong>Zap out</strong> when you want a full V3 position converted into one selected asset. Native ETH can be selected when the output is WETH.</p></Section>
+    <Section id="adjust" title="Adjust a V3 range"><VisualStep number="03" title="Move the earning bounds" text="Choose Edit range, drag the handles or enter new prices, and use pool-view zoom to keep the surrounding ticks visible. Review the market price and new bounds before confirming." src="/images/range-editor-detail.png" alt="RobinSwap edit liquidity range chart" caption="The shaded band is the new earning range; the market marker shows where the current pool price sits." /><p>RobinSwap removes the old liquidity and creates the replacement position. Wallets with atomic batch support can submit the flow together; others may show separate confirmations.</p><p>An out-of-range position is held in one asset and no longer earns fees. Moving the range can put it back to work, but also changes the position’s exposure.</p></Section>
     <Section id="earn" title="How liquidity earns"><p>Every swap pays the pool fee. V2 distributes fees by pool share. V3 distributes them only to positions whose range contains the current price.</p></Section>
-    <Section id="adjust" title="Adjust a V3 range"><p>Open a position from Portfolio and choose <strong>Edit range</strong>. Pick new bounds and review the amounts. RobinSwap removes the old liquidity and creates the replacement position. Wallets with atomic batch support can submit the flow together; others may show separate confirmations.</p><p>An out-of-range position is held in one asset and no longer earns fees. Moving the range can put it back to work, but also changes the position’s exposure.</p><h3>Zap out</h3><p>Choose <strong>Zap out</strong> to remove a full V3 position, collect its fees, and receive one selected asset. Native ETH can be selected when the output is WETH.</p></Section>
     <Section id="migrate" title="Move existing liquidity"><p>Portfolio can detect compatible Uniswap V3 positions held by the connected wallet. Uniswap V2 LP tokens can be found by pair address.</p><p>Migration removes the source liquidity and deposits the available assets into the matching RobinSwap pool. RobinSwap charges no migration fee. Price protection can stop the transaction if the source and destination pools move too far apart.</p></Section>
     <Section id="claim" title="Claiming fees"><Steps items={[{ title: "Open a position", text: "Choose any position in Portfolio." }, { title: "Check unclaimed fees", text: "The position shows fees earned in each token since the previous claim." }, { title: "Collect", text: "Select Collect fees and confirm. The tokens return to the wallet." }]}/><Note>Use <strong>Claim all</strong> to collect from multiple eligible V3 positions in one action when supported.</Note></Section>
   </Page>;
@@ -277,9 +296,9 @@ function LiquidityGuide() {
 function PortfolioGuide() {
   const toc = [{ id: "find", label: "What you’ll find" }, { id: "manage", label: "Manage V3" }, { id: "move", label: "Move liquidity" }];
   return <Page eyebrow="Manage" title="Portfolio" description="Track value, manage liquidity, claim fees, and review activity in one place." toc={toc}>
-    <Figure src="/images/Portfolio.png" alt="RobinSwap portfolio" caption="Portfolio separates current value, position status, fees, activity, and migration tools." />
+    <Figure src="/images/portfolio-overview-light.png" darkSrc="/images/portfolio-overview-dark.png" alt="RobinSwap liquidity portfolio overview" caption="Portfolio summarizes priced value, active positions, earning status, and each position’s share of capital." className="wide-product" />
     <Section id="find" title="What you’ll find"><CardGrid items={[{ title: "Positions", text: "V2 pool shares and V3 position NFTs held by the connected wallet." }, { title: "Unclaimed fees", text: "Fees by position, plus Claim all when several positions are ready." }, { title: "Activity", text: "Recent indexed swaps and liquidity actions with explorer links." }]}/></Section>
-    <Section id="manage" title="Managing V3 positions"><p>Open a V3 position to see its range, current price, and status.</p><div className="definition-list"><div><strong>In range</strong><span>Actively earning fees.</span></div><div><strong>Out of range</strong><span>Not earning and currently held in one asset.</span></div></div><p>From the position card, you can collect fees, edit the range, or zap out into one asset.</p></Section>
+    <Section id="manage" title="Managing V3 positions"><p>Open a V3 position to see its range, current price, and status.</p><div className="definition-list"><div><strong>In range</strong><span>Actively earning fees.</span></div><div><strong>Out of range</strong><span>Not earning and currently held in one asset.</span></div></div><p>From the position card, you can add liquidity, withdraw part or all of the position, edit its range, collect fees, or zap out into one asset.</p><CardGrid items={[{ title: "Add or withdraw", text: "See balances, Max, partial withdrawal controls, and direct two-token exits.", href: "/guides/liquidity" }, { title: "Edit the earning range", text: "Use the range chart, bounds, and pool-view zoom before confirming.", href: "/guides/liquidity" }]}/></Section>
     <Section id="move" title="Bring liquidity over"><p>The migration panel finds compatible Uniswap V3 positions automatically and supports Uniswap V2 lookup by pair address. Migration has no RobinSwap migration fee and includes price-deviation protection.</p></Section>
   </Page>;
 }
