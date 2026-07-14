@@ -1,17 +1,39 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "RobinSwap",
-  "description": "The operating manual for Robinhood Chain liquidity.",
+  "description": "Plain-language guides for trading, providing liquidity, and tracking activity on Robinhood Chain.",
   "seo": {
     "metatags": {
       "canonical": "https://docs.robinswap.finance"
     }
   },
   "colors": {
-    "primary": "#4a700a",
-    "light": "#d8ff81",
-    "dark": "#4a700a"
+    "primary": "#82C900",
+    "light": "#B7FF2A",
+    "dark": "#3F7200"
+  },
+  "background": {
+    "color": {
+      "light": "#F2F1E9",
+      "dark": "#0B0D0A"
+    }
+  },
+  "appearance": {
+    "default": "system"
+  },
+  "fonts": {
+    "heading": {
+      "family": "Instrument Sans",
+      "weight": 650
+    },
+    "body": {
+      "family": "Instrument Sans",
+      "weight": 400
+    }
+  },
+  "icons": {
+    "library": "lucide"
   },
   "favicon": "/favicon-32x32.png",
   "logo": {
@@ -19,7 +41,7 @@
     "dark": "/logo/dark.svg"
   },
   "navigation": {
-    "pages": [
+    "groups": [
       {
         "group": "Start here",
         "pages": ["index", "quickstart"]
@@ -35,35 +57,10 @@
     ],
     "global": {
       "anchors": [
-        { "anchor": "App", "href": "https://www.robinswap.finance", "icon": "arrow-up-right-from-square" },
-        { "anchor": "Explore", "href": "https://www.robinswap.finance/#explore", "icon": "chart-line" }
+        { "anchor": "Open app", "href": "https://www.robinswap.finance", "icon": "arrow-up-right" },
+        { "anchor": "Explore markets", "href": "https://www.robinswap.finance/#explore", "icon": "chart-no-axes-combined" }
       ]
-    },
-    "groups": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      },
-      {
-        "group": "Guides",
-        "icon": "book",
-        "pages": [
-          "guides/swap",
-          "guides/liquidity",
-          "guides/portfolio"
-        ]
-      },
-      {
-        "group": "Reference",
-        "icon": "code",
-        "pages": [
-          "reference/contracts"
-        ]
-      }
-    ]
+    }
   },
   "navbar": {
     "links": [
@@ -75,7 +72,10 @@
       "href": "https://www.robinswap.finance"
     }
   },
+  "search": {
+    "prompt": "Search RobinSwap docs"
+  },
   "contextual": {
-    "options": ["copy", "view", "chatgpt", "claude", "perplexity", "mcp", "cursor", "vscode"]
+    "options": ["copy", "view", "chatgpt"]
   }
 }

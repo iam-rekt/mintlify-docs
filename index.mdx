@@ -1,198 +1,55 @@
 ---
 title: "RobinSwap"
-description: "RobinSwap"
+description: "The plain-language guide to RobinSwap on Robinhood Chain."
+mode: "custom"
 ---
 
-<div
-  style={{
-position: "relative",
-overflow: "hidden",
-borderRadius: "24px",
-padding: "56px 40px",
-background: "radial-gradient(ellipse at 15% 0%, rgba(200,249,0,0.22), transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(200,249,0,0.08), transparent 60%), linear-gradient(180deg, #080a06 0%, #0d1109 100%)",
-border: "1px solid rgba(200,249,0,0.15)"
-}}
->
-  <div style={{ position: "relative", maxWidth: "900px" }}>
-    <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "28px" }}>
-      <svg viewBox="0 0 48 48" aria-hidden="true" width="56" height="56">
-        <rect width="48" height="48" rx="14" fill="#c8f900" />
-
-        <path d="M37.7 7.4C26.1 8.3 16.1 14.2 11.5 24c-2.5 5.3-2.4 10.7-1.4 15.8l5.8-6.2c4.6.9 9.6-1 12.6-5.2 4.6-6.4 5.9-13.7 9.2-21Z" fill="#080a06" />
-
-        <path d="M12.1 39.2c6-9.5 12.7-17.1 22.2-26.3M16.7 32.8l8.6-.8M21 26.7l8.3-.8M25.3 20.9l7.2-.8" fill="none" stroke="#c8f900" strokeWidth="2.2" strokeLinecap="round" />
-      </svg>
-
-      <div
-        style={{
-      padding: "6px 14px",
-      borderRadius: "999px",
-      fontSize: "11px",
-      fontWeight: "600",
-      letterSpacing: "0.12em",
-      textTransform: "uppercase",
-      background: "rgba(200,249,0,0.1)",
-      color: "#c8f900",
-      border: "1px solid rgba(200,249,0,0.3)"
-    }}
-      >
-        Robinhood Chain · Mainnet
-      </div>
-    </div>
-
-    <h1
-      style={{
-    fontSize: "clamp(36px, 6vw, 64px)",
-    fontWeight: "700",
-    letterSpacing: "-0.03em",
-    lineHeight: "1.02",
-    color: "#ffffff",
-    margin: "0 0 20px 0"
-  }}
-    >
-      Liquidity should feel<br />
-      <span style={{ color: "#c8f900" }}>legible.</span>
-    </h1>
-
-    <p
-      style={{
-    fontSize: "18px",
-    lineHeight: "1.6",
-    maxWidth: "620px",
-    color: "rgba(255,255,255,0.72)",
-    margin: "0 0 32px 0"
-  }}
-    >
-      RobinSwap is an AMM for Robinhood Chain: concentrated ranges when precision matters, simple pools when it doesn't, and one surface for routing, positions, and onchain market data.
-    </p>
-
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
-      <a
-        href="/quickstart"
-        style={{
-      display: "inline-flex",
-      alignItems: "center",
-      padding: "14px 24px",
-      borderRadius: "12px",
-      fontWeight: "600",
-      fontSize: "15px",
-      textDecoration: "none",
-      background: "#c8f900",
-      color: "#080a06"
-    }}
-      >
-        Make your first swap →
-      </a>
-
-      <a
-        href="/reference/contracts"
-        style={{
-      display: "inline-flex",
-      alignItems: "center",
-      padding: "14px 24px",
-      borderRadius: "12px",
-      fontWeight: "600",
-      fontSize: "15px",
-      textDecoration: "none",
-      background: "rgba(255,255,255,0.06)",
-      color: "#ffffff",
-      border: "1px solid rgba(255,255,255,0.15)"
-    }}
-      >
-        View contracts
-      </a>
+<div className="rs-hero">
+  <div className="rs-hero-copy-block">
+    <p className="rs-eyebrow">RobinSwap field guide · Robinhood Chain</p>
+    <h1>Markets move.<br /><span>You stay oriented.</span></h1>
+    <p className="rs-hero-copy">Trade, provide liquidity, and track every position without learning a new dialect first.</p>
+    <div className="rs-actions">
+      <a href="/quickstart">Make a first swap →</a>
+      <a href="/guides/liquidity">Explore liquidity</a>
     </div>
   </div>
-</div>
-
-<div
-  style={{
-display: "grid",
-gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-gap: "16px",
-marginTop: "48px"
-}}
->
-  <div
-    style={{
-  padding: "24px",
-  borderRadius: "16px",
-  background: "#080a06",
-  border: "1px solid rgba(200,249,0,0.15)"
-}}
-  >
-    <p style={{ fontSize: "11px", fontWeight: "600", letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8f900", margin: "0 0 12px 0" }}>01 · Trade</p>
-    <h3 style={{ fontSize: "20px", fontWeight: "600", letterSpacing: "-0.01em", color: "#ffffff", margin: "0 0 8px 0" }}>One quote, clear route.</h3>
-    <p style={{ fontSize: "14px", lineHeight: "1.5", color: "rgba(255,255,255,0.65)", margin: 0 }}>Local pools take priority. External routing is a fallback when no local pool can quote.</p>
-  </div>
-
-  <div
-    style={{
-  padding: "24px",
-  borderRadius: "16px",
-  background: "#080a06",
-  border: "1px solid rgba(200,249,0,0.15)"
-}}
-  >
-    <p style={{ fontSize: "11px", fontWeight: "600", letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8f900", margin: "0 0 12px 0" }}>02 · Provide</p>
-    <h3 style={{ fontSize: "20px", fontWeight: "600", letterSpacing: "-0.01em", color: "#ffffff", margin: "0 0 8px 0" }}>Ranges without fog.</h3>
-    <p style={{ fontSize: "14px", lineHeight: "1.5", color: "rgba(255,255,255,0.65)", margin: 0 }}>Create a V2 or V3 position, inspect the range, collect fees, and rebalance in one place.</p>
-  </div>
-
-  <div
-    style={{
-  padding: "24px",
-  borderRadius: "16px",
-  background: "#080a06",
-  border: "1px solid rgba(200,249,0,0.15)"
-}}
-  >
-    <p style={{ fontSize: "11px", fontWeight: "600", letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8f900", margin: "0 0 12px 0" }}>03 · Observe</p>
-    <h3 style={{ fontSize: "20px", fontWeight: "600", letterSpacing: "-0.01em", color: "#ffffff", margin: "0 0 8px 0" }}>Data from the chain.</h3>
-    <p style={{ fontSize: "14px", lineHeight: "1.5", color: "rgba(255,255,255,0.65)", margin: 0 }}>Pools, tokens, swaps, liquidity, TVL, volume and fee history — straight from protocol events.</p>
+  <div className="rs-range-map" aria-label="Illustration of a V3 liquidity range">
+    <strong>Active range</strong>
+    <div className="rs-range-line"></div>
+    <div className="rs-range-dot"></div>
+    <span>Min</span><span>Market</span><span>Max</span>
   </div>
 </div>
 
-<h2 style={{ marginTop: "64px", marginBottom: "24px", fontSize: "28px", fontWeight: "600", letterSpacing: "-0.02em" }}>Choose your route</h2>
-
-<Columns cols={2}>
-  <Card title="Quickstart" icon="bolt" href="/quickstart">
-    Connect, switch to Robinhood Chain, review a quote, make your first swap.
-  </Card>
-
-  <Card title="Swap guide" icon="arrow-right-arrow-left" href="/guides/swap">
-    Routes, slippage, approvals, and reading a quote with confidence.
-  </Card>
-
-  <Card title="Liquidity guide" icon="chart-line" href="/guides/liquidity">
-    Add V2 or V3 positions, choose a range, and earn fees.
-  </Card>
-
-  <Card title="Portfolio guide" icon="wallet" href="/guides/portfolio">
-    Adjust liquidity, collect fees, and track points and referrals.
-  </Card>
-
-  <Card title="Contracts" icon="file-contract" href="/reference/contracts">
-    Verified mainnet addresses and fee tiers on Robinhood Chain.
-  </Card>
-</Columns>
-
-<div style={{ marginTop: "48px" }}>
-  <Frame caption="Explore is the live read on RobinSwap markets — pool activity, liquidity, volume and token movement.">
-    <img src="/images/Explore.png" alt="RobinSwap Explore page showing live market metrics." />
-  </Frame>
+<div className="rs-guide-strip">
+  <div><strong>Trade</strong><span>Local and cross-chain routes in one swap flow.</span></div>
+  <div><strong>Provide</strong><span>Balanced deposits or a single-token V3 zap.</span></div>
+  <div><strong>Track</strong><span>Positions, fees, points, and market activity.</span></div>
 </div>
 
-<div
-  style={{
-marginTop: "40px",
-padding: "32px",
-borderRadius: "16px",
-background: "linear-gradient(135deg, rgba(200,249,0,0.08), rgba(200,249,0,0.02))",
-border: "1px solid rgba(200,249,0,0.25)"
-}}
->
-  <p style={{ fontSize: "11px", fontWeight: "600", letterSpacing: "0.12em", textTransform: "uppercase", color: "#688000", margin: "0 0 8px 0" }}>A note on risk</p>
-  <p style={{ fontSize: "18px", fontWeight: "500", margin: "0 0 8px 0" }}>Onchain settlement is real. Interfaces are a convenience layer.</p>
-  <p style={{ fontSize: "14px", opacity: 0.7, margin: 0 }}>Verify token addresses, pool state, and price impact before signing. This documentation describes the current deployment — it is not financial, legal, or security advice.</p>
+## Start where you are
+
+<CardGroup cols={2}>
+  <Card title="First swap" icon="zap" href="/quickstart">
+    Connect, read the quote, and confirm with confidence.
+  </Card>
+  <Card title="Swap and bridge" icon="arrow-left-right" href="/guides/swap">
+    Understand local routes, cross-chain settlement, slippage, and approvals.
+  </Card>
+  <Card title="Put assets to work" icon="chart-no-axes-combined" href="/guides/liquidity">
+    Choose V2 or V3, set a range, zap, or migrate an existing position.
+  </Card>
+  <Card title="Manage a position" icon="wallet-cards" href="/guides/portfolio">
+    Edit ranges, zap out, claim fees, and review weekly points.
+  </Card>
+</CardGroup>
+
+<div className="rs-section-intro">
+  <h2>See the market before you act</h2>
+  <p>The Trade canvas pairs a live market view with the swap itself, so pool size, volume, fees, and the quote stay in the same frame.</p>
 </div>
+
+<Frame caption="The current RobinSwap Trade view combines market context with the active quote.">
+  <img src="/images/hero-1.png" alt="RobinSwap Trade page with a pool chart and swap card." />
+</Frame>

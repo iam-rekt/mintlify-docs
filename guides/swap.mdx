@@ -1,27 +1,34 @@
 ---
-title: "Swap"
-description: "How to trade tokens on RobinSwap with confidence."
-icon: "arrow-right-arrow-left"
+title: "Swap and bridge"
+description: "Understand RobinSwap quotes, local execution, and cross-chain settlement."
+icon: "arrow-left-right"
 ---
 
-Swapping on RobinSwap is designed to be simple: pick two tokens, review the quote, confirm in your wallet.
+Choose what you are paying with and what you want to receive. RobinSwap then prepares a local or cross-chain route and shows the execution terms before you sign.
 
 <Frame caption="The swap card shows live quotes, price impact, and minimum received before you confirm.">
-  ![RobinSwap swap interface.](/images/Explore.png)
+  ![RobinSwap swap interface.](/images/hero-1.png)
 </Frame>
 
-## Before you swap
+## Choose a route
 
-- Your wallet is connected and set to **Robinhood Chain** (chain ID `4663`).
-- You have enough ETH for gas.
-- If you're trading an ERC-20 token, RobinSwap will ask for a one-time **approval** before the first trade of that token.
+<CardGroup cols={2}>
+  <Card title="On Robinhood Chain" icon="route">
+    RobinSwap checks its available pools and builds the local route for the selected pair.
+  </Card>
+  <Card title="From another network" icon="waypoints">
+    Select a source network and token. The destination stays on Robinhood Chain while the route bridges and swaps as needed.
+  </Card>
+</CardGroup>
+
+The card always shows the route you are about to execute. A different route requires a fresh review.
 
 ## Reading a quote
 
 Every quote shows the key numbers you need before signing.
 
 <Frame>
-  ![RobinSwap swap interface showing a live quote.](/images/Explore.png)
+  ![RobinSwap swap interface showing a live quote.](/images/hero-1.png)
 </Frame>
 
 | Field | What it means |
@@ -29,35 +36,43 @@ Every quote shows the key numbers you need before signing.
 | **Expected output** | The estimated amount you'll receive at current prices. |
 | **Minimum received** | The lowest amount the trade will execute at, based on your slippage setting. |
 | **Price impact** | How much your trade moves the pool price. Higher impact = worse rate. |
-| **Route** | Which pool(s) your trade goes through. |
-| **Network fee** | Gas paid to Robinhood Chain validators. |
+| **Route** | Where the swap executes and, for cross-chain trades, how it reaches Robinhood Chain. |
+| **Network fee** | Gas paid on the network where you sign. It is separate from the amount received. |
 
 <Tip>
-  If price impact is high (\>1-2%), try a smaller amount or split the trade.
+  Price impact is context-dependent. Treat an unexpectedly high value as a prompt to check pool depth, token selection, and trade size before continuing.
 </Tip>
 
-## Slippage
+## Slippage and quote freshness
 
-Slippage is how much price movement you'll accept between quote and execution. The default is usually fine.
+Slippage is how much price movement you allow between quote and execution.
 
-- **0.1% - 0.5%** — Stable pairs and deep pools.
-- **0.5% - 1%** — Most trades.
-- **1%\+** — Volatile tokens or thin liquidity.
+- **0.1%–0.5%** — Often appropriate for stable pairs and deep pools.
+- **0.5%–1%** — A common starting point for ordinary trades.
+- **Above 1%** — May be necessary for volatile or thin markets; review the risk carefully.
 
-Set slippage too low and your trade may fail. Too high and you risk a worse fill.
+Set it too low and the trade may fail. Set it too high and you allow a worse fill. RobinSwap refreshes the quote automatically; review again if the route or minimum received changes.
 
 ## Approvals
 
-The first time you trade an ERC-20 token, you'll sign an approval so the router can move it. This is a one-time step per token. Native ETH does not need approval.
+An ERC-20 token needs an approval before the selected router can use it. Native ETH does not. Your wallet shows approvals separately from the swap transaction.
 
-## Confirming the swap
+## Local confirmation
 
 1. Review the quote and minimum received.
 2. Click **Swap**.
 3. Confirm in your wallet.
-4. Wait for on-chain confirmation — usually seconds on Robinhood Chain.
+4. Wait for the Robinhood Chain confirmation.
 
 Your new balance updates automatically once the transaction confirms.
+
+## Cross-chain settlement
+
+After the source transaction is submitted, the swap card keeps the route status visible. It shows a time estimate when one is available and moves through pending, destination submitted, and complete states.
+
+<Info>
+  Do not submit the same cross-chain trade again just because the destination balance has not arrived yet. Check the active status and source transaction first.
+</Info>
 
 ## Troubleshooting
 
@@ -67,13 +82,15 @@ Your new balance updates automatically once the transaction confirms.
   </Accordion>
 
   <Accordion title="No route found">
-    There's no pool with enough liquidity for this pair. Try a different token, smaller size, or route through a common asset like ETH.
+    The selected pair, amount, or network path has no executable quote. Try a smaller amount, a common asset such as ETH, or another source network.
   </Accordion>
 
   <Accordion title="Quote keeps changing">
-    Prices move. RobinSwap refreshes the quote to reflect current pool state. Lock it in by confirming quickly.
+    Pool and bridge conditions move. RobinSwap refreshes the quote to show current execution terms; review the latest minimum before confirming.
   </Accordion>
 </AccordionGroup>
 
 <CardGroup cols={2}>
+  <Card title="First swap" icon="bolt" href="/quickstart">A compact walkthrough from connection to confirmation.</Card>
+  <Card title="Provide liquidity" icon="chart-line" href="/guides/liquidity">Learn how the pools that power routes are created and managed.</Card>
 </CardGroup>

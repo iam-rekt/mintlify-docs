@@ -1,32 +1,32 @@
 ---
 title: "Portfolio"
-description: "Track positions, fees, points and referrals in one place."
+description: "Track value, manage liquidity, claim fees, and review points in one place."
 icon: "wallet"
 ---
 
-The **Portfolio** is your dashboard for everything you've done on RobinSwap — positions, fees, trade history, points and referrals in one view.
+Portfolio is the control room for the connected wallet: position value, active ranges, accrued fees, recent onchain activity, and weekly points.
 
-<Frame caption="Portfolio brings your positions, unclaimed fees, and activity together on one page.">
-  ![RobinSwap portfolio dashboard.](/images/Explore.png)
+<Frame caption="Portfolio separates current value, position status, points, and migration tools.">
+  ![RobinSwap portfolio dashboard.](/images/Portfolio.png)
 </Frame>
 
 ## What you'll find
 
 <CardGroup cols={2}>
   <Card title="Positions" icon="chart-line">
-    Every V2 and V3 position you hold, with live values and status.
+    V2 pool shares and V3 position NFTs found in the connected wallet.
   </Card>
 
   <Card title="Unclaimed fees" icon="coins">
-    Fees earned from trades in your pools. Collect anytime.
+    Fees by position, plus **Claim all** when more than one position is ready.
   </Card>
 
   <Card title="Swap history" icon="clock-rotate-left">
-    Recent trades with links to Robinhood Chain explorer.
+    Recent indexed swaps and liquidity actions, with explorer links.
   </Card>
 
   <Card title="Points & referrals" icon="star">
-    Weekly points from eligible activity, plus your referral link.
+    Weekly score, recorded activity, referral name, and invite status.
   </Card>
 </CardGroup>
 
@@ -37,25 +37,31 @@ Click any V3 position to see its range, current price, and status.
 - **In range** — Actively earning fees.
 - **Out of range** — Not earning; sitting in one asset.
 
-From the position view you can:
+From a V3 position card you can:
 
 - **Collect fees** without touching the underlying liquidity.
-- **Increase liquidity** to add more to the same range.
-- **Remove liquidity** to withdraw partially or fully.
+- **Edit range** to move the capital into new bounds.
+- **Zap out** to withdraw, collect, and receive one asset.
 
 <Tip>
-  To change a V3 range, remove the position and open a new one with your desired bounds.
+  Position values are shown only when RobinSwap has a secure USD price for the underlying assets. An unpriced position still exists onchain even when the interface shows a dash.
 </Tip>
 
-## Points
+## Bring liquidity over
 
-Eligible activity (swaps, liquidity provision) can earn weekly points after you complete the one-time **points registration** signature. This is a free signature — no gas, no on-chain transaction.
+The migration panel finds compatible Uniswap V3 positions automatically and supports Uniswap V2 lookup by pair address. Migration has no RobinSwap migration fee and includes price-deviation protection.
+
+## Points and referrals
+
+Eligible activity can be recorded for weekly points only after you complete the one-time **points registration** signature. It is a wallet signature, not an approval or onchain transaction.
 
 Check your point total and current week's progress from the Portfolio page.
 
 ## Referrals
 
-Share your referral link to earn a share of points from users you bring in. Your link and stats are on the Portfolio page.
+Referral attribution is set once for a new wallet. Referral rewards, eligibility, and weekly allocations are program rules, not a share of a user’s trading or LP fees.
 
 <CardGroup cols={2}>
+  <Card title="Points and referrals" icon="star" href="/guides/points">Understand registration, eligible activity, and referral attribution.</Card>
+  <Card title="Liquidity guide" icon="chart-line" href="/guides/liquidity">Add, adjust, and collect from V2 and V3 positions.</Card>
 </CardGroup>

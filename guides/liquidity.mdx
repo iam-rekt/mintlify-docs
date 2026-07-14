@@ -1,68 +1,64 @@
 ---
 title: "Liquidity"
-description: "Earn fees by providing liquidity to RobinSwap pools."
-icon: "chart-line"
+description: "Create, zap, migrate, and adjust RobinSwap liquidity positions."
+icon: "chart-no-axes-combined"
 ---
 
-When you add liquidity, you deposit two tokens into a pool. Every time someone swaps through that pool, a fee is charged — and a share of that fee accrues to you.
+Liquidity providers deposit assets that traders swap against. In return, they earn a share of that pool’s fees and take on the pool’s price risk.
 
 RobinSwap supports two pool types: **V2** (simple) and **V3** (concentrated).
 
-<Frame caption="The Pools view shows every position, its status, and unclaimed fees at a glance.">
-  ![RobinSwap pools and liquidity view.](/images/Explore.png)
+<Frame caption="The Liquidity directory compares pool size, 24-hour flow, LP fees, estimated APR, and age.">
+  ![RobinSwap pools and liquidity view.](/images/Liquidity.png)
 </Frame>
 
-## V2 vs V3 — which one?
+## Pick a pool style
 
 <CardGroup cols={2}>
   <Card title="V2 pools" icon="circle">
-    Deposit two tokens in equal value. Your liquidity spreads across all prices. Simple, passive, no management needed.
+    Deposit two assets at the current pool ratio. Liquidity remains active across the full price curve.
   </Card>
 
   <Card title="V3 pools" icon="chart-simple">
-    Pick a **price range**. Your liquidity is concentrated there, earning more fees when the price is inside your range — and none when it's outside.
+    Set a **minimum** and **maximum** price. The position earns fees only while the market stays inside that range.
   </Card>
 </CardGroup>
 
 <Tip>
-  New to LP? Start with V2. Comfortable managing ranges? V3 can earn more on the same capital.
+  V2 is simpler to maintain. V3 gives you more control, but a narrower range can move out of range sooner.
 </Tip>
 
-## Adding V2 liquidity
+## Create a position
 
 <Steps>
-  <Step title="Open Pools">
-    Go to the **Pools** page and choose **New position**.
+  <Step title="Open Liquidity">
+    Choose **Add liquidity**, then select V2 or V3.
   </Step>
   <Step title="Pick your pair">
-    Select two tokens. If the pool doesn't exist yet, you'll be prompted to create it and set the initial price.
+    Select two tokens. For a new pool, the first provider sets the starting price. Review it carefully.
   </Step>
   <Step title="Enter an amount">
-    Enter one side — the other fills automatically based on the current pool ratio.
+    For a balanced deposit, enter one side and RobinSwap calculates the other from the pool and range.
   </Step>
   <Step title="Approve and deposit">
-    Approve each token (one-time), then confirm the deposit.
+    For V3, drag or type the minimum and maximum. Use the chart zoom controls to inspect the surrounding market before confirming.
+  </Step>
+  <Step title="Approve and deposit">
+    Approve the required tokens, then review the final amounts in your wallet.
   </Step>
 </Steps>
 
-You'll receive LP tokens representing your share of the pool.
+V2 returns fungible LP tokens. V3 creates a position NFT containing the pair, fee tier, liquidity, and range.
 
-## Adding V3 liquidity
+## Single-token V3 deposit
 
-<Steps>
-  <Step title="Pick a fee tier">
-    Fee tiers match volatility. Lower fees for stable pairs, higher fees for volatile ones.
-  </Step>
-  <Step title="Set your price range">
-    Choose a **min** and **max** price. Your liquidity earns fees only while the market price is inside this range.
-  </Step>
-  <Step title="Deposit tokens">
-    Deposit amounts of both tokens matching your chosen range. Narrower ranges = higher capital efficiency, but more time out-of-range.
-  </Step>
-  <Step title="Confirm">
-    Approve and confirm. Your position appears in your portfolio.
-  </Step>
-</Steps>
+Choose **One token** to zap a single asset into a V3 position. RobinSwap quotes the internal swap, checks the estimated impact, and deposits both sides into the selected range.
+
+The zap fee is **0.15%** of the zap value. The quote shows the estimated position amounts before you sign.
+
+<Warning>
+  A zap is not a way around thin liquidity. Reduce the amount or widen the range if the protected quote cannot balance the position safely.
+</Warning>
 
 ## How you earn
 
@@ -75,27 +71,27 @@ Every swap in a pool pays the pool's fee. That fee is split among LPs in proport
   Fees don't auto-compound — they sit as claimable amounts until you collect or reinvest them.
 </Tip>
 
-## Adjusting your position
+## Adjust a V3 range
 
 Open any position from **Pools** or **Portfolio** to manage it.
 
-<AccordionGroup>
-  <Accordion title="Add more liquidity">
-    Deposit additional tokens into an existing V2 position, or add to the same range on a V3 position.
-  </Accordion>
+Open the position in Portfolio and choose **Edit range**. Pick new bounds and review the amounts. RobinSwap removes the old liquidity and mints the replacement position; wallets that support atomic batches can submit the flow together, while other wallets may show separate confirmations.
 
-  <Accordion title="Remove liquidity">
-    Withdraw partially (by percentage) or fully. Fully exiting a V3 position burns its NFT.
-  </Accordion>
+An out-of-range position is held in one asset and no longer earns fees. Moving the range can put it back to work, but it also changes your exposure.
 
-  <Accordion title="Change a V3 range">
-    Ranges are fixed once created. To move a V3 range: **remove** the position, then **open a new one** with new min/max prices. Collect fees first so they don't get bundled into the withdrawal.
-  </Accordion>
-</AccordionGroup>
+## Zap out
+
+Choose **Zap out** on a V3 position to remove the full position, collect its fees, and receive one selected asset. The zap-out fee is also **0.15%**. Native ETH can be selected when the output is WETH.
+
+## Move existing liquidity
+
+Portfolio can detect official Uniswap V3 positions held by the connected wallet. Uniswap V2 LP tokens can be found by entering the pair address.
+
+The migration removes the source liquidity and deposits the available assets into the matching RobinSwap pool. RobinSwap charges **no migration fee**. Price protection can stop the transaction if the source and destination pools move too far apart.
 
 ## Claiming fees
 
-Fees are separate from your deposited liquidity — you can claim them without touching the position.
+Fees are separate from your deposited liquidity. You can collect them without reducing the position.
 
 <Steps>
   <Step title="Open the position">
@@ -110,8 +106,10 @@ Fees are separate from your deposited liquidity — you can claim them without t
 </Steps>
 
 <Info>
-  Collecting fees costs gas. Batch collections rather than claiming tiny amounts frequently.
+  Use **Claim all** in Portfolio to collect from multiple eligible positions in one action when supported.
 </Info>
 
 <CardGroup cols={2}>
+  <Card title="Portfolio" icon="wallet" href="/guides/portfolio">Track position status, accrued fees, and recent activity.</Card>
+  <Card title="Contract reference" icon="file-contract" href="/reference/contracts">Verify the deployed contracts before interacting directly.</Card>
 </CardGroup>

@@ -1,43 +1,47 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "First swap"
+description: "Connect a wallet, review a quote, and make a swap on Robinhood Chain."
 ---
 
 <Info>
-  You need a wallet with Robinhood Chain enabled and enough ETH for gas plus the token you want to trade.
+  Keep a small amount of ETH for gas. If your assets are on another supported network, the swap flow can route them into Robinhood Chain.
 </Info>
 
 <Steps>
-  <Step title="Open RobinSwap and connect">
-    Go to [robinswap.finance](https://www.robinswap.finance) and choose **Connect wallet**. RobinSwap only reads your address after you approve.
+  <Step title="Open RobinSwap">
+    Go to [robinswap.finance](https://www.robinswap.finance) and select **Connect wallet**. Confirm the connection request in your wallet.
   </Step>
   <Step title="Switch to Robinhood Chain">
-    The app defaults to Robinhood Chain (chain ID `4663`). If your wallet is on another network, accept the switch prompt.
+    For a local swap, use Robinhood Chain (chain ID `4663`). For a cross-chain swap, select the source network in the swap card.
   </Step>
   <Step title="Pick your tokens">
-    Choose the **From** token and enter an amount, then choose the **To** token. You can search by symbol, name, or contract address. Always double-check imported token addresses.
+    Choose the token you are selling, enter an amount, then select the token you want to receive. Search by contract address when you are unsure—names and symbols can be copied.
   </Step>
   <Step title="Review the quote">
-    Check the expected output and **Minimum received**. The quote refreshes automatically as prices move.
+    Check the output, **Minimum received**, price impact, and selected route. The quote refreshes as market conditions change.
   </Step>
   <Step title="Approve and swap">
-    ERC-20 tokens need a one-time approval. Confirm the approval, then confirm the swap in your wallet. Native ETH skips the approval step.
+    ERC-20 tokens require an approval before the router can swap them. Confirm that transaction first, then confirm the swap. Native ETH does not require approval.
   </Step>
 </Steps>
 
 <Check>
-  When the transaction confirms, your new token balance appears in your wallet. Eligible activity counts toward weekly points once you complete the one-time points signature.
+  A local swap finishes after its Robinhood Chain transaction confirms. A cross-chain swap stays pending until the destination transfer settles.
 </Check>
+
+<Frame caption="RobinSwap keeps the live market and the active quote in one view.">
+  ![RobinSwap Trade page with a pool chart and swap card.](/images/hero-1.png)
+</Frame>
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Swap guide" icon="arrow-right-arrow-left" href="/guides/swap">
-    Slippage, routing, approvals and how to read a quote.
+  <Card title="Swap guide" icon="arrow-left-right" href="/guides/swap">
+    Local routing, cross-chain settlement, slippage, and approvals.
   </Card>
 
-  <Card title="Add liquidity" icon="chart-line" href="/guides/liquidity">
-    Provide liquidity in V2 or V3 pools and earn fees.
+  <Card title="Add liquidity" icon="chart-no-axes-combined" href="/guides/liquidity">
+    Provide two assets, make a single-token deposit, or migrate a position.
   </Card>
 
   <Card title="Manage your portfolio" icon="wallet" href="/guides/portfolio">
@@ -45,6 +49,6 @@ description: "Begin with a guide on the fastest path to a successful outcome"
   </Card>
 
   <Card title="Contract addresses" icon="file-contract" href="/reference/contracts">
-    Verified mainnet contracts and explorer links.
+    Mainnet contracts and explorer links.
   </Card>
 </CardGroup>
