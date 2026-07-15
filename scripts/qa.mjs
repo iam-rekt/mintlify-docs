@@ -30,7 +30,7 @@ try {
   page.on("pageerror", (error) => runtimeErrors.push(error.message));
 
   const routes = [
-    ["/", "Know what happens"],
+    ["/", "Your guide to"],
     ["/quickstart", "Your first swap"],
     ["/guides/swap", "Swap"],
     ["/guides/liquidity", "Liquidity"],
@@ -74,7 +74,7 @@ try {
   mobile.setDefaultTimeout(8_000);
   const mobileErrors = [];
   mobile.on("pageerror", (error) => mobileErrors.push(error.message));
-  await inspectPage(mobile, "/", "Know what happens");
+  await inspectPage(mobile, "/", "Your guide to");
   await mobile.getByRole("button", { name: /open navigation/i }).click();
   check(await mobile.locator(".sidebar.is-open").isVisible(), "mobile navigation opens");
   await mobile.locator('.sidebar a[href="/guides/swap"]').click();

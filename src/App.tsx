@@ -220,7 +220,7 @@ function Overview() {
   return (
     <div className="overview">
       <section className="overview-hero">
-        <div><p className="hero-kicker">RobinSwap documentation</p><h1>Know what happens<br/><em>before you sign.</em></h1><span>Short, visual guides for trading, providing liquidity, and managing positions on Robinhood Chain.</span><div className="hero-actions"><Link href="/quickstart">Make a first swap <Icon name="arrow" size={16}/></Link><Link href="/guides/liquidity">Manage liquidity</Link></div></div>
+        <div><p className="hero-kicker">Welcome to RobinSwap</p><h1>Your guide to<br/><em>RobinSwap.</em></h1><span>Learn how to trade, provide liquidity, and manage positions on Robinhood Chain with clear, visual walkthroughs.</span><div className="hero-actions"><Link href="/quickstart">Make a first swap <Icon name="arrow" size={16}/></Link><Link href="/guides/liquidity">Manage liquidity</Link></div></div>
         <div className="home-path" aria-label="RobinSwap documentation paths">
           <div><span>01</span><strong>Trade</strong><small>Read the quote and its protection.</small></div>
           <div><span>02</span><strong>Provide</strong><small>Choose a pool, fee, and range.</small></div>
