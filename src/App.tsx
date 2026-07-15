@@ -9,10 +9,10 @@ import {
   useState,
 } from "react";
 
-type Route = "/" | "/quickstart" | "/guides/swap" | "/guides/liquidity" | "/guides/portfolio" | "/reference/contracts";
+type Route = "/" | "/quickstart" | "/guides/swap" | "/guides/liquidity" | "/guides/portfolio" | "/reference/contracts" | "/find-us";
 type NoteKind = "info" | "tip" | "warning";
 
-const ROUTES: Route[] = ["/", "/quickstart", "/guides/swap", "/guides/liquidity", "/guides/portfolio", "/reference/contracts"];
+const ROUTES: Route[] = ["/", "/quickstart", "/guides/swap", "/guides/liquidity", "/guides/portfolio", "/reference/contracts", "/find-us"];
 
 const NAV_GROUPS = [
   {
@@ -32,7 +32,10 @@ const NAV_GROUPS = [
   },
   {
     label: "Reference",
-    links: [{ href: "/reference/contracts" as Route, label: "Contracts" }],
+    links: [
+      { href: "/reference/contracts" as Route, label: "Contracts" },
+      { href: "/find-us" as Route, label: "Find us" },
+    ],
   },
 ] as const;
 
@@ -47,6 +50,7 @@ const SEARCH_ITEMS = [
   { href: "/guides/liquidity" as Route, title: "Move existing liquidity", text: "Migrate compatible Uniswap V2 and V3 positions without a RobinSwap migration fee." },
   { href: "/guides/portfolio" as Route, title: "Portfolio", text: "Track V2 shares, V3 positions, ranges, fees, and activity." },
   { href: "/reference/contracts" as Route, title: "Contracts", text: "RobinSwap V2 and V3 deployment addresses on Robinhood Chain." },
+  { href: "/find-us" as Route, title: "Find us", text: "Official RobinSwap community, analytics, portfolio, and market pages." },
 ];
 
 const NavigationContext = createContext<(route: Route) => void>(() => undefined);
@@ -165,7 +169,7 @@ function Topbar({ dark, toggleTheme, openMenu, openSearch }: { dark: boolean; to
 }
 
 function MarketRail({ path }: { path: Route }) {
-  const active = path === "/guides/liquidity" ? 1 : path === "/guides/portfolio" || path === "/reference/contracts" ? 2 : 0;
+  const active = path === "/guides/liquidity" ? 1 : path === "/guides/portfolio" || path === "/reference/contracts" || path === "/find-us" ? 2 : 0;
   return (
     <div className="market-rail" aria-label="Documentation journey">
       {["Trade", "Provide", "Manage"].map((label, index) => <div key={label} className={index <= active ? "active" : ""}><span>{label}</span><i /></div>)}
@@ -332,6 +336,26 @@ function ContractsGuide() {
   </Page>;
 }
 
+const officialLinks = [
+  { code: "X", name: "X", detail: "Announcements and product updates", href: "https://x.com/RobinSwap_" },
+  { code: "TG", name: "Telegram", detail: "Official RobinSwap community", href: "https://t.me/RobinSwap_Official" },
+  { code: "DL", name: "DefiLlama", detail: "Protocol TVL and tracked metrics", href: "https://defillama.com/protocol/robinswap" },
+  { code: "DB", name: "DeBank", detail: "RobinSwap protocol positions and activity", href: "https://debank.com/protocols/hood_robinswap" },
+  { code: "DX", name: "Dexscreener", detail: "Live Robinhood Chain pools and trades", href: "https://dexscreener.com/robinhood/robinswap" },
+];
+
+function FindUsGuide() {
+  return <Page eyebrow="Official links" title="Find us" description="Follow RobinSwap, join the community, or inspect live protocol activity.">
+    <div className="official-directory">
+      {officialLinks.map((item) => <a key={item.name} href={item.href} target="_blank" rel="noreferrer" className="official-link">
+        <span className="official-code">{item.code}</span>
+        <span className="official-copy"><strong>{item.name}</strong><small>{item.detail}</small></span>
+        <Icon name="external" size={16}/>
+      </a>)}
+    </div>
+  </Page>;
+}
+
 function NotFound() {
   return <div className="not-found"><span>404</span><h1>This page isn’t in the field guide.</h1><p>Use the navigation or return to the overview.</p><Link href="/">Return to overview <Icon name="arrow" size={16}/></Link></div>;
 }
@@ -343,6 +367,7 @@ function RouteContent({ path }: { path: string }) {
   if (path === "/guides/liquidity") return <LiquidityGuide />;
   if (path === "/guides/portfolio") return <PortfolioGuide />;
   if (path === "/reference/contracts") return <ContractsGuide />;
+  if (path === "/find-us") return <FindUsGuide />;
   return <NotFound />;
 }
 

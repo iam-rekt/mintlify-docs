@@ -161,6 +161,16 @@ a.doc-card:hover { transform: translateY(-2px); border-color: var(--lime); }
 .fee-tiers strong { color: var(--green); font-size: 18px; }
 .fee-tiers span { margin-top: 8px; color: var(--muted); font-size: 10px; line-height: 1.45; }
 
+.official-directory { display: grid; gap: 1px; overflow: hidden; margin-top: 34px; border: 1px solid var(--rule); border-radius: 14px; background: var(--rule); }
+.official-link { display: grid; grid-template-columns: 42px minmax(0, 1fr) 28px; gap: 15px; align-items: center; min-height: 82px; padding: 16px 18px; color: var(--ink); background: var(--surface); text-decoration: none; transition: background .16s ease; }
+.official-link:hover { background: color-mix(in srgb, var(--lime) 7%, var(--surface)); }
+.official-code { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid var(--rule); border-radius: 11px; color: var(--green); background: var(--surface-2); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; font-weight: 800; letter-spacing: .04em; }
+.official-copy { display: grid; gap: 5px; }
+.official-copy strong { font-size: 14px; }
+.official-copy small { color: var(--muted); font-size: 11px; line-height: 1.4; }
+.official-link > svg { justify-self: end; color: var(--muted-2); }
+.official-link:hover > svg { color: var(--green); }
+
 .overview { max-width: 1080px; margin: 0 auto; padding: 40px clamp(22px, 3.5vw, 48px) 96px; }
 .overview-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: clamp(38px, 6vw, 72px); align-items: center; padding: clamp(34px, 5vw, 56px); border: 1px solid var(--rule); border-radius: 16px; background: var(--surface); }
 .overview-hero::before { content: ""; position: absolute; inset: 0 auto auto 0; width: 29%; height: 3px; border-radius: 16px 0 0; background: var(--lime); }
