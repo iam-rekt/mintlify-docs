@@ -323,7 +323,7 @@ function PortfolioGuide() {
 }
 
 function WebsiteWidgetGuide() {
-  const toc = [{ id: "install", label: "Install" }, { id: "customize", label: "Customize" }, { id: "attributes", label: "Attributes" }, { id: "wallet", label: "Wallet connection" }, { id: "troubleshooting", label: "Troubleshooting" }];
+  const toc = [{ id: "install", label: "Install" }, { id: "customize", label: "Customize" }, { id: "attributes", label: "Attributes" }, { id: "wallet", label: "Wallet connection" }];
   const install = `<div id="robinswap-widget"></div>
 
 <script
@@ -358,15 +358,14 @@ function WebsiteWidgetGuide() {
     ["data-height", "Starting height in pixels, clamped from 560 to 1200."],
     ["data-radius", "Outer corner radius in pixels, clamped from 0 to 40."],
     ["data-loading", "Set to eager to load immediately. Otherwise the iframe uses lazy loading."],
-    ["data-partner", "Optional lowercase integration label using letters, numbers, underscore, or hyphen."],
   ];
   return <Page eyebrow="Integrate" title="Website widget" description="Add RobinSwap to a website and match it to your layout." toc={toc}>
+    <p className="widget-value-line">Give users the best available swap price across the Robinhood Chain ecosystem without making them leave your site.</p>
     <div className="widget-preview-grid"><Figure src="/images/website-widget-preview.png" alt="RobinSwap website widget with a live ETH to USDG quote" caption="The complete quote and wallet flow stay inside the responsive widget." /><Figure src="/images/website-widget-token-selector.png" alt="RobinSwap widget token selector" caption="Token selection remains contained on narrow embeds." /></div>
     <Section id="install" title="Install the widget"><p>Add a container where the widget should appear, then load the RobinSwap script.</p><CodeBlock>{install}</CodeBlock><p>The container uses the available width while the widget respects <code>data-max-width</code>. Place it inside the same responsive column or card used by the rest of the page.</p></Section>
     <Section id="customize" title="Customize the surface"><p>Set a complete palette directly on the script.</p><CodeBlock>{customize}</CodeBlock><p>If <code>data-text-color</code> is omitted, RobinSwap selects readable light or dark text from the background. Button text adjusts automatically. The RobinSwap name and iframe title remain fixed.</p></Section>
     <Section id="attributes" title="Available attributes"><div className="definition-list widget-attributes">{attributes.map(([name, detail]) => <div key={name}><strong><code>{name}</code></strong><span>{detail}</span></div>)}</div><Note>Token values must be valid addresses for the selected source chain. <code>data-amount</code> is the amount the user initially pays and can be changed inside the widget.</Note></Section>
     <Section id="wallet" title="Wallet connection"><p>The widget contains RobinSwap's wallet setup, so the host website does not install Wagmi or pass a provider into the iframe. <strong>Connect wallet</strong> opens the RobinSwap wallet chooser, including WalletConnect and compatible browser wallets.</p><p>Some extensions choose not to expose an injected wallet inside a cross-origin iframe. In that case, use WalletConnect or select <strong>Open RobinSwap</strong>.</p></Section>
-    <Section id="troubleshooting" title="Troubleshooting"><div className="definition-list"><div><strong>The page is blank</strong><span>Serve the page over HTTP or HTTPS, verify the script URL, and confirm the selected container exists.</span></div><div><strong>The widget is the wrong size</strong><span>Give the host container a usable width, then set data-max-width for the largest desired size.</span></div><div><strong>The colors are hard to read</strong><span>Remove data-text-color to restore automatic contrast, or set an explicit six-digit hex color.</span></div><div><strong>A browser wallet is unavailable</strong><span>Open the chooser again, then use WalletConnect or Open RobinSwap if the extension still does not appear.</span></div><div><strong>The iframe is blocked</strong><span>Allow https://www.robinswap.finance in the host's frame-src and script-src Content Security Policy directives.</span></div></div></Section>
   </Page>;
 }
 
