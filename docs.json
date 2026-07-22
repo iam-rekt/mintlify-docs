@@ -48,7 +48,7 @@
       },
       {
         "group": "Use RobinSwap",
-        "pages": ["guides/swap", "guides/liquidity", "guides/portfolio"]
+        "pages": ["guides/swap", "guides/liquidity", "guides/portfolio", "guides/website-widget"]
       },
       {
         "group": "Reference",

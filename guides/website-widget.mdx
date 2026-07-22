@@ -1,0 +1,98 @@
+---
+title: "Website widget"
+description: "Add RobinSwap to a website and match it to your layout."
+icon: "panel-top"
+---
+
+The RobinSwap widget adds the hosted swap interface to a website with one script. RobinSwap supplies the interface, wallet connection, quotes, and transaction flow; the host website controls placement, sizing, and presentation colors.
+
+## Install the widget
+
+Add a container where the widget should appear, then load the RobinSwap script.
+
+```html
+<div id="robinswap-widget"></div>
+
+<script
+  src="https://www.robinswap.finance/robinswap-widget.js"
+  data-container="#robinswap-widget"
+  data-theme="dark"
+  data-max-width="520"
+  data-height="760">
+</script>
+```
+
+The container uses the available width while the widget respects `data-max-width`. Place it inside the same responsive column or card used by the rest of the page.
+
+## Customize the surface
+
+Set a complete palette directly on the script:
+
+```html
+<script
+  src="https://www.robinswap.finance/robinswap-widget.js"
+  data-container="#robinswap-widget"
+  data-background="#ffffe0"
+  data-box-color="#fffef7"
+  data-text-color="#10211b"
+  data-button-color="#82c900"
+  data-radius="18"
+  data-max-width="560">
+</script>
+```
+
+If `data-text-color` is omitted, RobinSwap selects readable light or dark text from the background. The primary button also selects readable text automatically. The RobinSwap name and iframe title remain fixed.
+
+## Available attributes
+
+| Attribute | Purpose |
+| --- | --- |
+| `data-container` | CSS selector for the host element. Defaults to `#robinswap-widget`. |
+| `data-theme` | `light` or `dark`. Omit it to follow the visitor's system theme or the custom background. |
+| `data-background` | Six-digit hex color for the widget canvas. |
+| `data-box-color` | Six-digit hex color for the network and swap panels. |
+| `data-text-color` | Six-digit hex color for primary text, including the header and footer. |
+| `data-button-color` | Six-digit hex color for the main Swap or Connect wallet button. |
+| `data-from-chain` | Initial source chain ID. The destination remains Robinhood Chain. |
+| `data-token-in` | Initial input token contract address. |
+| `data-token-out` | Initial output token contract address. |
+| `data-amount` | Initial amount in the input token's normal decimal format, such as `25.5`. |
+| `data-max-width` | Widget width in pixels, clamped from `320` to `960`. It still contracts on smaller screens. |
+| `data-height` | Starting height in pixels, clamped from `560` to `1200`. Open content can grow within that range. |
+| `data-radius` | Outer corner radius in pixels, clamped from `0` to `40`. |
+| `data-loading` | Set to `eager` to load immediately. Otherwise the iframe uses lazy loading. |
+| `data-partner` | Optional lowercase integration label using letters, numbers, `_`, or `-`. |
+
+<Info>
+  Token values must be valid addresses for the selected source chain. `data-amount` is the amount the user initially pays; users can change it inside the widget.
+</Info>
+
+## Wallet connection
+
+The widget contains RobinSwap's wallet setup, so the host website does not install Wagmi or pass a provider into the iframe. **Connect wallet** opens the RobinSwap wallet chooser, including WalletConnect and compatible browser wallets.
+
+Some extensions choose not to expose an injected wallet inside a cross-origin iframe. In that case, use WalletConnect or select **Open RobinSwap** to continue on the full RobinSwap site.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The page is blank">
+    Confirm that the page is served over HTTP or HTTPS, the script URL is exact, and the element selected by `data-container` exists. Opening an HTML file directly with a `file://` URL can prevent embedded features from loading correctly.
+  </Accordion>
+
+  <Accordion title="The widget is the wrong size">
+    Give the host container a usable width, then set `data-max-width` for the largest desired size. The widget contracts with its container, so changing only the iframe's surrounding page width may be necessary on narrow layouts.
+  </Accordion>
+
+  <Accordion title="The colors are hard to read">
+    Remove `data-text-color` to restore automatic contrast, or set an explicit six-digit hex text color. Use `data-box-color` for the network and swap panels instead of applying page CSS inside the iframe.
+  </Accordion>
+
+  <Accordion title="A browser wallet is unavailable">
+    Open the wallet chooser again so RobinSwap can request current browser-wallet announcements. If the extension still does not appear inside the embed, use WalletConnect or **Open RobinSwap**.
+  </Accordion>
+
+  <Accordion title="The iframe is blocked by the host website">
+    Check the host's Content Security Policy. Its `frame-src` directive must allow `https://www.robinswap.finance`, and its `script-src` directive must allow the same origin for the widget loader.
+  </Accordion>
+</AccordionGroup>
