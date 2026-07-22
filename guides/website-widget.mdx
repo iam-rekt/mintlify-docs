@@ -6,6 +6,10 @@ icon: "panel-top"
 
 The RobinSwap widget adds the hosted swap interface to a website with one script. RobinSwap supplies the interface, wallet connection, quotes, and transaction flow; the host website controls placement, sizing, and presentation colors.
 
+<Frame caption="The hosted widget keeps the complete quote and wallet flow inside a responsive RobinSwap surface.">
+  ![RobinSwap website swap widget with a live ETH to USDG quote.](/images/website-widget-preview.png)
+</Frame>
+
 ## Install the widget
 
 Add a container where the widget should appear, then load the RobinSwap script.
@@ -72,6 +76,10 @@ If `data-text-color` is omitted, RobinSwap selects readable light or dark text f
 The widget contains RobinSwap's wallet setup, so the host website does not install Wagmi or pass a provider into the iframe. **Connect wallet** opens the RobinSwap wallet chooser, including WalletConnect and compatible browser wallets.
 
 Some extensions choose not to expose an injected wallet inside a cross-origin iframe. In that case, use WalletConnect or select **Open RobinSwap** to continue on the full RobinSwap site.
+
+<Frame caption="Token selection remains readable and contained on narrow embeds.">
+  ![RobinSwap widget token selector on a mobile-width embed.](/images/website-widget-token-selector.png)
+</Frame>
 
 ## Troubleshooting
 

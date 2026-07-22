@@ -103,6 +103,12 @@ kbd { margin-left: auto; padding: 2px 6px; border: 1px solid var(--rule); border
 .doc-section h3 { margin: 32px 0 10px; font-size: 19px; letter-spacing: -.025em; }
 .doc-section p { margin: 0 0 16px; color: var(--muted); font-size: 15px; line-height: 1.7; }
 .doc-section p strong { color: var(--ink); }
+.doc-section code { color: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }
+.code-block { overflow-x: auto; margin: 22px 0; padding: 19px 20px; border: 1px solid var(--rule); border-radius: 12px; color: var(--ink); background: var(--surface); font: 500 12px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; tab-size: 2; }
+.code-block code { color: inherit; font: inherit; white-space: pre; }
+.widget-attributes strong code { color: var(--green); }
+.widget-preview-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 14px; align-items: start; margin-top: 30px; }
+.widget-preview-grid .doc-figure { margin: 0; }
 
 .note { display: grid; grid-template-columns: 25px minmax(0, 1fr); gap: 12px; margin: 23px 0; padding: 16px 18px; border: 1px solid var(--rule); border-left: 3px solid var(--green); border-radius: 11px; background: var(--surface); }
 .note.warning { border-left-color: var(--danger); }
@@ -128,7 +134,7 @@ a.doc-card:hover { transform: translateY(-2px); border-color: var(--lime); }
 .doc-card > svg { position: absolute; top: 21px; right: 19px; color: var(--green); }
 
 .doc-figure { overflow: hidden; margin: 30px 0 10px; padding: 9px 9px 0; border: 1px solid var(--rule); border-radius: 14px; background: var(--surface-2); }
-.doc-figure img { display: block; width: 100%; height: auto; border: 1px solid color-mix(in srgb, var(--rule) 75%, transparent); border-radius: 9px; object-fit: contain; }
+.doc-figure img, .doc-figure video { display: block; width: 100%; height: auto; border: 1px solid color-mix(in srgb, var(--rule) 75%, transparent); border-radius: 9px; object-fit: contain; }
 .doc-figure figcaption { margin: 9px -9px 0; padding: 11px 14px; border-top: 1px solid var(--rule); color: var(--muted); background: var(--surface); font-size: 10px; line-height: 1.45; }
 .figure-dark { display: none !important; }
 :root[data-theme="dark"] .figure-light { display: none !important; }
@@ -155,6 +161,7 @@ a.doc-card:hover { transform: translateY(-2px); border-color: var(--lime); }
 .contract-table code { overflow: hidden; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; text-overflow: ellipsis; }
 .contract-table a { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid var(--rule); border-radius: 8px; color: var(--green); }
 .fee-tiers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); }
+.fee-tiers.fee-tiers-five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .fee-tiers > div { min-width: 0; padding: 18px; }
 .fee-tiers > div + div { border-left: 1px solid var(--rule); }
 .fee-tiers strong, .fee-tiers span { display: block; }
@@ -281,17 +288,20 @@ footer > a { display: inline-flex; align-items: center; gap: 6px; color: var(--m
   .doc-section { padding-top: 40px; }
   .doc-section h2 { font-size: 25px; }
   .definition-list > div { grid-template-columns: 1fr; gap: 7px; }
+  .code-block { margin-right: -4px; margin-left: -4px; padding: 16px; font-size: 11px; }
   .network-card { grid-template-columns: 1fr; }
   .network-card > div + div { border-top: 1px solid var(--rule); border-left: 0; }
   .contract-table > div { grid-template-columns: 1fr 30px; gap: 8px; }
   .contract-table code { grid-column: 1; grid-row: 2; }
   .contract-table a { grid-column: 2; grid-row: 1 / span 2; }
   .fee-tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fee-tiers.fee-tiers-five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fee-tiers > div + div { border-left: 0; }
   .fee-tiers > div:nth-child(even) { border-left: 1px solid var(--rule); }
   .fee-tiers > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
   .doc-figure { margin-right: -4px; margin-left: -4px; padding: 6px 6px 0; border-radius: 11px; }
   .doc-figure figcaption { margin: 6px -6px 0; }
+  .widget-preview-grid { grid-template-columns: 1fr; }
   .visual-step-copy { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; }
   .home-path > div { grid-template-columns: 27px 66px minmax(0, 1fr); }
   footer { padding: 22px 18px; }

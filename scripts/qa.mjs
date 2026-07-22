@@ -35,6 +35,7 @@ try {
     ["/guides/swap", "Swap"],
     ["/guides/liquidity", "Liquidity"],
     ["/guides/portfolio", "Portfolio"],
+    ["/guides/website-widget", "Website widget"],
     ["/reference/contracts", "Contracts"],
   ];
 
@@ -48,7 +49,16 @@ try {
   check((await walkthroughImages.count()) === 3, "liquidity guide renders add, withdraw, and range walkthroughs");
   const imageHealth = await walkthroughImages.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0));
   check(imageHealth, "liquidity walkthrough images load successfully");
+  const migrationVideo = page.locator('.doc-video video');
+  check((await migrationVideo.count()) === 1, "liquidity guide renders the migration action video");
+  check(await migrationVideo.evaluate((video) => video.readyState >= 2 && video.videoWidth > 0), "liquidity migration video loads successfully");
   await page.screenshot({ path: "/tmp/robinswap-docs-liquidity.png", fullPage: true });
+
+  await page.goto(`${origin}/guides/website-widget`, { waitUntil: "networkidle" });
+  const widgetImages = page.locator('.widget-preview-grid img');
+  check((await widgetImages.count()) === 2, "website widget guide renders both real interface previews");
+  check(await widgetImages.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0)), "website widget previews load successfully");
+  await page.screenshot({ path: "/tmp/robinswap-docs-widget.png", fullPage: true });
 
   await page.getByRole("button", { name: /search documentation/i }).click();
   const search = page.getByPlaceholder(/search robinswap docs/i);
@@ -82,6 +92,8 @@ try {
   await mobile.screenshot({ path: "/tmp/robinswap-docs-mobile.png", fullPage: true });
   await inspectPage(mobile, "/guides/liquidity", "Liquidity");
   await mobile.screenshot({ path: "/tmp/robinswap-docs-liquidity-mobile.png", fullPage: true });
+  await inspectPage(mobile, "/guides/website-widget", "Website widget");
+  await mobile.screenshot({ path: "/tmp/robinswap-docs-widget-mobile.png", fullPage: true });
   check(mobileErrors.length === 0, `mobile runtime has no errors${mobileErrors.length ? `: ${mobileErrors.join(" | ")}` : ""}`);
   await mobileContext.close();
 } finally {

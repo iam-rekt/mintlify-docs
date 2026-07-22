@@ -9,10 +9,10 @@ import {
   useState,
 } from "react";
 
-type Route = "/" | "/quickstart" | "/guides/swap" | "/guides/liquidity" | "/guides/portfolio" | "/reference/contracts" | "/find-us";
+type Route = "/" | "/quickstart" | "/guides/swap" | "/guides/liquidity" | "/guides/portfolio" | "/guides/website-widget" | "/reference/contracts" | "/find-us";
 type NoteKind = "info" | "tip" | "warning";
 
-const ROUTES: Route[] = ["/", "/quickstart", "/guides/swap", "/guides/liquidity", "/guides/portfolio", "/reference/contracts", "/find-us"];
+const ROUTES: Route[] = ["/", "/quickstart", "/guides/swap", "/guides/liquidity", "/guides/portfolio", "/guides/website-widget", "/reference/contracts", "/find-us"];
 
 const NAV_GROUPS = [
   {
@@ -28,6 +28,7 @@ const NAV_GROUPS = [
       { href: "/guides/swap" as Route, label: "Swap and bridge" },
       { href: "/guides/liquidity" as Route, label: "Liquidity" },
       { href: "/guides/portfolio" as Route, label: "Portfolio" },
+      { href: "/guides/website-widget" as Route, label: "Website widget" },
     ],
   },
   {
@@ -48,7 +49,9 @@ const SEARCH_ITEMS = [
   { href: "/guides/liquidity" as Route, title: "Reduce or withdraw liquidity", text: "Withdraw part or all of a V3 position directly into both pool tokens." },
   { href: "/guides/liquidity" as Route, title: "Adjust a liquidity range", text: "Move V3 bounds with the range chart and preview the new position before signing." },
   { href: "/guides/liquidity" as Route, title: "Move existing liquidity", text: "Migrate compatible Uniswap V2 and V3 positions without a RobinSwap migration fee." },
+  { href: "/guides/liquidity" as Route, title: "Migrate a fee tier", text: "Move a RobinSwap V3 position into a different pool fee tier and range." },
   { href: "/guides/portfolio" as Route, title: "Portfolio", text: "Track V2 shares, V3 positions, ranges, fees, and activity." },
+  { href: "/guides/website-widget" as Route, title: "Website widget", text: "Install the hosted swap widget, customize its surface, and connect wallets." },
   { href: "/reference/contracts" as Route, title: "Contracts", text: "RobinSwap V2 and V3 deployment addresses on Robinhood Chain." },
   { href: "/find-us" as Route, title: "Find us", text: "Official RobinSwap community, analytics, portfolio, and market pages." },
 ];
@@ -197,6 +200,10 @@ function Note({ kind = "info", children }: PropsWithChildren<{ kind?: NoteKind }
   return <div className={`note ${kind}`}><span className="note-symbol">{kind === "warning" ? "!" : kind === "tip" ? "↗" : "i"}</span><div>{children}</div></div>;
 }
 
+function CodeBlock({ children }: PropsWithChildren) {
+  return <pre className="code-block"><code>{children}</code></pre>;
+}
+
 function Steps({ items }: { items: { title: string; text: string }[] }) {
   return <ol className="steps">{items.map((item, index) => <li key={item.title}><span>{String(index + 1).padStart(2, "0")}</span><div><strong>{item.title}</strong><p>{item.text}</p></div></li>)}</ol>;
 }
@@ -209,6 +216,13 @@ function Figure({ src, darkSrc, alt, caption, className = "" }: { src: string; d
   return <figure className={`doc-figure ${className}`.trim()}>
     <img className={darkSrc ? "figure-light" : undefined} src={src} alt={alt} loading="lazy" />
     {darkSrc ? <img className="figure-dark" src={darkSrc} alt={alt} loading="lazy" /> : null}
+    <figcaption>{caption}</figcaption>
+  </figure>;
+}
+
+function VideoFigure({ src, poster, caption }: { src: string; poster: string; caption: string }) {
+  return <figure className="doc-figure doc-video">
+    <video controls autoPlay loop muted playsInline poster={poster} aria-label={caption}><source src={src} type="video/mp4" /></video>
     <figcaption>{caption}</figcaption>
   </figure>;
 }
@@ -276,7 +290,7 @@ function SwapGuide() {
 }
 
 function LiquidityGuide() {
-  const toc = [{ id: "styles", label: "Pool styles" }, { id: "create", label: "Create a position" }, { id: "zap", label: "Single-token zap" }, { id: "add", label: "Add to a position" }, { id: "withdraw", label: "Reduce or withdraw" }, { id: "adjust", label: "Adjust a range" }, { id: "earn", label: "How LPs earn" }, { id: "migrate", label: "Move liquidity" }, { id: "claim", label: "Claim fees" }];
+  const toc = [{ id: "styles", label: "Pool styles" }, { id: "create", label: "Create a position" }, { id: "zap", label: "Single-token zap" }, { id: "add", label: "Add to a position" }, { id: "withdraw", label: "Reduce or withdraw" }, { id: "adjust", label: "Adjust a range" }, { id: "earn", label: "How LPs earn" }, { id: "migrate", label: "Move liquidity" }, { id: "tier", label: "Migrate fee tier" }, { id: "claim", label: "Claim fees" }];
   return <Page eyebrow="Provide" title="Liquidity" description="Create a position, then add, withdraw, or reshape it with clear previews." toc={toc}>
     <Figure src="/images/Liquidity.png" alt="RobinSwap liquidity directory" caption="Compare pool size, 24-hour flow, LP fees, estimated APR, and age." />
     <Section id="styles" title="Pick a pool style"><CardGrid items={[{ title: "V2 pools", text: "Deposit two assets at the current pool ratio. Liquidity remains active across the full price curve." }, { title: "V3 pools", text: "Choose a minimum and maximum price. The position earns while the market stays inside that range." }]}/><Note kind="tip">V2 is simpler to maintain. V3 offers more control, but a narrower range can move out of range sooner.</Note></Section>
@@ -292,7 +306,8 @@ function LiquidityGuide() {
     <Section id="withdraw" title="Reduce or withdraw"><VisualStep number="02" title="Choose how much to remove" text="Switch to Reduce / withdraw, select 25%, 50%, 75%, or Full, then review the estimated principal. A direct withdrawal returns both pool tokens and does not perform a zap." src="/images/manage-withdraw.png" alt="RobinSwap reduce or withdraw liquidity panel" caption="A full withdrawal returns both pool assets and collects available position fees." /><h3>Receive one token instead</h3><p>Choose <strong>Zap out</strong> when you want a full V3 position converted into one selected asset. Native ETH can be selected when the output is WETH.</p></Section>
     <Section id="adjust" title="Adjust a V3 range"><VisualStep number="03" title="Move the earning bounds" text="Choose Edit range, drag the handles or enter new prices, and use pool-view zoom to keep the surrounding ticks visible. Review the market price and new bounds before confirming." src="/images/range-editor-detail.png" alt="RobinSwap edit liquidity range chart" caption="The shaded band is the new earning range; the market marker shows where the current pool price sits." /><p>RobinSwap removes the old liquidity and creates the replacement position. Wallets with atomic batch support can submit the flow together; others may show separate confirmations.</p><p>An out-of-range position is held in one asset and no longer earns fees. Moving the range can put it back to work, but also changes the position’s exposure.</p></Section>
     <Section id="earn" title="How liquidity earns"><p>Every swap pays the pool fee. V2 distributes fees by pool share. V3 distributes them only to positions whose range contains the current price.</p></Section>
-    <Section id="migrate" title="Move existing liquidity"><p>Portfolio can detect compatible Uniswap V3 positions held by the connected wallet. Uniswap V2 LP tokens can be found by pair address.</p><p>Migration removes the source liquidity and deposits the available assets into the matching RobinSwap pool. RobinSwap charges no migration fee. Price protection can stop the transaction if the source and destination pools move too far apart.</p></Section>
+    <Section id="migrate" title="Move existing liquidity"><p>Portfolio can detect compatible Uniswap V3 positions held by the connected wallet. Uniswap V2 LP tokens can be found by pair address.</p><p>Migration removes the source liquidity and deposits the available assets into the matching RobinSwap pool. The RobinSwap <strong>migration fee is none</strong>; the wallet still pays network gas. Price protection can stop the transaction if the source and destination pools move too far apart.</p><VideoFigure src="/images/liquidity-migration-actions.mp4" poster="/images/liquidity-migration-actions.png" caption="Fee Tier and Migrate are separate entry points; hover movement swaps the Uniswap mark into RobinSwap." /></Section>
+    <Section id="tier" title="Migrate a pool fee tier"><p>Choose <strong>Fee Tier</strong> on Liquidity, or open <strong>Range / tier</strong> from a V3 position in Portfolio. Select a different destination tier and either keep a full range or set new bounds.</p><p>RobinSwap withdraws the source position, initializes the destination pool when necessary, and mints a replacement NFT. After confirmation it verifies the new owner, pair, fee tier, range, and liquidity before reporting success.</p><div className="fee-tiers fee-tiers-five"><div><strong>0.01%</strong><span>Available tier</span></div><div><strong>0.05%</strong><span>Available tier</span></div><div><strong>0.25%</strong><span>Available tier</span></div><div><strong>0.30%</strong><span>Available tier</span></div><div><strong>1.00%</strong><span>Available tier</span></div></div><Note>A fee-tier migration creates a replacement NFT. Review the destination tier and range before confirming.</Note></Section>
     <Section id="claim" title="Claiming fees"><Steps items={[{ title: "Open a position", text: "Choose any position in Portfolio." }, { title: "Check unclaimed fees", text: "The position shows fees earned in each token since the previous claim." }, { title: "Collect", text: "Select Collect fees and confirm. The tokens return to the wallet." }]}/><Note>Use <strong>Claim all</strong> to collect from multiple eligible V3 positions in one action when supported.</Note></Section>
   </Page>;
 }
@@ -303,7 +318,55 @@ function PortfolioGuide() {
     <Figure src="/images/portfolio-overview-light.png" darkSrc="/images/portfolio-overview-dark.png" alt="RobinSwap liquidity portfolio overview" caption="Portfolio summarizes priced value, active positions, earning status, and each position’s share of capital." className="wide-product" />
     <Section id="find" title="What you’ll find"><CardGrid items={[{ title: "Positions", text: "V2 pool shares and V3 position NFTs held by the connected wallet." }, { title: "Unclaimed fees", text: "Fees by position, plus Claim all when several positions are ready." }, { title: "Activity", text: "Recent indexed swaps and liquidity actions with explorer links." }]}/></Section>
     <Section id="manage" title="Managing V3 positions"><p>Open a V3 position to see its range, current price, and status.</p><div className="definition-list"><div><strong>In range</strong><span>Actively earning fees.</span></div><div><strong>Out of range</strong><span>Not earning and currently held in one asset.</span></div></div><p>From the position card, you can add liquidity, withdraw part or all of the position, edit its range, collect fees, or zap out into one asset.</p><CardGrid items={[{ title: "Add or withdraw", text: "See balances, Max, partial withdrawal controls, and direct two-token exits.", href: "/guides/liquidity" }, { title: "Edit the earning range", text: "Use the range chart, bounds, and pool-view zoom before confirming.", href: "/guides/liquidity" }]}/></Section>
-    <Section id="move" title="Bring liquidity over"><p>The migration panel finds compatible Uniswap V3 positions automatically and supports Uniswap V2 lookup by pair address. Migration has no RobinSwap migration fee and includes price-deviation protection.</p></Section>
+    <Section id="move" title="Bring liquidity over"><p>The migration panel finds compatible Uniswap V3 positions automatically and supports Uniswap V2 lookup by pair address. The RobinSwap migration fee is none, and price-deviation protection applies.</p><p>Use <strong>Fee Tier</strong> to move a RobinSwap V3 position into a different tier. The flow can initialize a missing destination pool and creates a replacement NFT whose owner, tier, range, and liquidity are verified after confirmation.</p></Section>
+  </Page>;
+}
+
+function WebsiteWidgetGuide() {
+  const toc = [{ id: "install", label: "Install" }, { id: "customize", label: "Customize" }, { id: "attributes", label: "Attributes" }, { id: "wallet", label: "Wallet connection" }, { id: "troubleshooting", label: "Troubleshooting" }];
+  const install = `<div id="robinswap-widget"></div>
+
+<script
+  src="https://www.robinswap.finance/robinswap-widget.js"
+  data-container="#robinswap-widget"
+  data-theme="dark"
+  data-max-width="520"
+  data-height="760">
+</script>`;
+  const customize = `<script
+  src="https://www.robinswap.finance/robinswap-widget.js"
+  data-container="#robinswap-widget"
+  data-background="#ffffe0"
+  data-box-color="#fffef7"
+  data-text-color="#10211b"
+  data-button-color="#82c900"
+  data-radius="18"
+  data-max-width="560">
+</script>`;
+  const attributes = [
+    ["data-container", "CSS selector for the host element. Defaults to #robinswap-widget."],
+    ["data-theme", "light or dark. Omit it to follow the visitor's system theme or the custom background."],
+    ["data-background", "Six-digit hex color for the widget canvas."],
+    ["data-box-color", "Six-digit hex color for the network and swap panels."],
+    ["data-text-color", "Six-digit hex color for primary text, including the header and footer."],
+    ["data-button-color", "Six-digit hex color for the main Swap or Connect wallet button."],
+    ["data-from-chain", "Initial source chain ID. The destination remains Robinhood Chain."],
+    ["data-token-in", "Initial input token contract address."],
+    ["data-token-out", "Initial output token contract address."],
+    ["data-amount", "Initial amount in the input token's normal decimal format, such as 25.5."],
+    ["data-max-width", "Widget width in pixels, clamped from 320 to 960. It still contracts on smaller screens."],
+    ["data-height", "Starting height in pixels, clamped from 560 to 1200."],
+    ["data-radius", "Outer corner radius in pixels, clamped from 0 to 40."],
+    ["data-loading", "Set to eager to load immediately. Otherwise the iframe uses lazy loading."],
+    ["data-partner", "Optional lowercase integration label using letters, numbers, underscore, or hyphen."],
+  ];
+  return <Page eyebrow="Integrate" title="Website widget" description="Add RobinSwap to a website and match it to your layout." toc={toc}>
+    <div className="widget-preview-grid"><Figure src="/images/website-widget-preview.png" alt="RobinSwap website widget with a live ETH to USDG quote" caption="The complete quote and wallet flow stay inside the responsive widget." /><Figure src="/images/website-widget-token-selector.png" alt="RobinSwap widget token selector" caption="Token selection remains contained on narrow embeds." /></div>
+    <Section id="install" title="Install the widget"><p>Add a container where the widget should appear, then load the RobinSwap script.</p><CodeBlock>{install}</CodeBlock><p>The container uses the available width while the widget respects <code>data-max-width</code>. Place it inside the same responsive column or card used by the rest of the page.</p></Section>
+    <Section id="customize" title="Customize the surface"><p>Set a complete palette directly on the script.</p><CodeBlock>{customize}</CodeBlock><p>If <code>data-text-color</code> is omitted, RobinSwap selects readable light or dark text from the background. Button text adjusts automatically. The RobinSwap name and iframe title remain fixed.</p></Section>
+    <Section id="attributes" title="Available attributes"><div className="definition-list widget-attributes">{attributes.map(([name, detail]) => <div key={name}><strong><code>{name}</code></strong><span>{detail}</span></div>)}</div><Note>Token values must be valid addresses for the selected source chain. <code>data-amount</code> is the amount the user initially pays and can be changed inside the widget.</Note></Section>
+    <Section id="wallet" title="Wallet connection"><p>The widget contains RobinSwap's wallet setup, so the host website does not install Wagmi or pass a provider into the iframe. <strong>Connect wallet</strong> opens the RobinSwap wallet chooser, including WalletConnect and compatible browser wallets.</p><p>Some extensions choose not to expose an injected wallet inside a cross-origin iframe. In that case, use WalletConnect or select <strong>Open RobinSwap</strong>.</p></Section>
+    <Section id="troubleshooting" title="Troubleshooting"><div className="definition-list"><div><strong>The page is blank</strong><span>Serve the page over HTTP or HTTPS, verify the script URL, and confirm the selected container exists.</span></div><div><strong>The widget is the wrong size</strong><span>Give the host container a usable width, then set data-max-width for the largest desired size.</span></div><div><strong>The colors are hard to read</strong><span>Remove data-text-color to restore automatic contrast, or set an explicit six-digit hex color.</span></div><div><strong>A browser wallet is unavailable</strong><span>Open the chooser again, then use WalletConnect or Open RobinSwap if the extension still does not appear.</span></div><div><strong>The iframe is blocked</strong><span>Allow https://www.robinswap.finance in the host's frame-src and script-src Content Security Policy directives.</span></div></div></Section>
   </Page>;
 }
 
@@ -332,7 +395,7 @@ function ContractsGuide() {
     <Section id="v2" title="V2"><ContractTable rows={contracts.v2}/></Section>
     <Section id="v3" title="V3"><ContractTable rows={contracts.v3}/></Section>
     <Section id="assets" title="Wrapped native asset"><ContractTable rows={contracts.assets}/></Section>
-    <Section id="tiers" title="V3 fee tiers"><div className="fee-tiers"><div><strong>0.01%</strong><span>Stable or pegged pairs</span></div><div><strong>0.05%</strong><span>Correlated pairs</span></div><div><strong>0.30%</strong><span>Standard pairs</span></div><div><strong>1.00%</strong><span>Exotic or volatile pairs</span></div></div></Section>
+    <Section id="tiers" title="V3 fee tiers"><div className="fee-tiers fee-tiers-five"><div><strong>0.01%</strong><span>Stable or pegged pairs</span></div><div><strong>0.05%</strong><span>Correlated pairs</span></div><div><strong>0.25%</strong><span>General-purpose pairs</span></div><div><strong>0.30%</strong><span>Standard pairs</span></div><div><strong>1.00%</strong><span>Exotic or volatile pairs</span></div></div></Section>
   </Page>;
 }
 
@@ -366,6 +429,7 @@ function RouteContent({ path }: { path: string }) {
   if (path === "/guides/swap") return <SwapGuide />;
   if (path === "/guides/liquidity") return <LiquidityGuide />;
   if (path === "/guides/portfolio") return <PortfolioGuide />;
+  if (path === "/guides/website-widget") return <WebsiteWidgetGuide />;
   if (path === "/reference/contracts") return <ContractsGuide />;
   if (path === "/find-us") return <FindUsGuide />;
   return <NotFound />;

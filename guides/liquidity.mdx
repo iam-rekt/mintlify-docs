@@ -40,7 +40,7 @@ RobinSwap supports two pool types: **V2** (simple) and **V3** (concentrated).
   <Step title="Enter an amount">
     For a balanced deposit, enter one side and RobinSwap calculates the other from the pool and range.
   </Step>
-  <Step title="Approve and deposit">
+  <Step title="Set the V3 range">
     For V3, drag or type the minimum and maximum. Use the chart zoom controls to inspect the surrounding market before confirming.
   </Step>
   <Step title="Approve and deposit">
@@ -103,7 +103,25 @@ An out-of-range position is held in one asset and no longer earns fees. Moving t
 
 Portfolio can detect official Uniswap V3 positions held by the connected wallet. Uniswap V2 LP tokens can be found by entering the pair address.
 
-The migration removes the source liquidity and deposits the available assets into the matching RobinSwap pool. RobinSwap charges **no migration fee**. Price protection can stop the transaction if the source and destination pools move too far apart.
+The migration removes the source liquidity and deposits the available assets into the matching RobinSwap pool. The RobinSwap **migration fee is none**; the wallet still pays network gas. Price protection can stop the transaction if the source and destination pools move too far apart.
+
+<Frame caption="Fee Tier and Migrate are separate entry points. Hover movement swaps the Uniswap mark into RobinSwap before opening the migration flow.">
+  <video controls autoPlay loop muted playsInline poster="/images/liquidity-migration-actions.png" aria-label="RobinSwap Liquidity page showing the Fee Tier and Uniswap migration actions">
+    <source src="/images/liquidity-migration-actions.mp4" type="video/mp4" />
+  </video>
+</Frame>
+
+## Migrate a pool fee tier
+
+Choose **Fee Tier** on Liquidity, or open **Range / tier** from a V3 position in Portfolio. Select a different destination tier and either keep a full range or set new bounds.
+
+RobinSwap withdraws the source position, initializes the destination pool when necessary, and mints a replacement NFT. After confirmation it verifies the new owner, pair, fee tier, range, and liquidity before reporting success.
+
+Supported destination tiers are **0.01%**, **0.05%**, **0.25%**, **0.30%**, and **1.00%**. The current tier is disabled because migrating a position into the same tier would not change it.
+
+<Info>
+  A fee-tier migration creates a replacement NFT. Review the destination tier and range before confirming; the position earns according to the destination pool after migration.
+</Info>
 
 ## Claiming fees
 

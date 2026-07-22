@@ -40,10 +40,13 @@ From a V3 position card you can:
 - **Add liquidity** at the position's current fee tier and range.
 - **Reduce / withdraw** part or all of the position into both pool assets.
 - **Edit range** to move the capital into new bounds.
+- **Change fee tier** to remint the position in another supported V3 pool tier.
 - **Zap out** to withdraw, collect, and receive one asset.
 
 ## Bring liquidity over
 
-The migration panel finds compatible Uniswap V3 positions automatically and supports Uniswap V2 lookup by pair address. Migration has no RobinSwap migration fee and includes price-deviation protection.
+The migration panel finds compatible Uniswap V3 positions automatically and supports Uniswap V2 lookup by pair address. The RobinSwap migration fee is none, and price-deviation protection applies.
+
+Use **Fee Tier** to move a RobinSwap V3 position into a different tier. The flow can initialize a missing destination pool and creates a replacement NFT whose owner, tier, range, and liquidity are verified after confirmation.
 
 <Card title="Liquidity guide" icon="chart-line" href="/guides/liquidity">Add, adjust, and collect from V2 and V3 positions.</Card>
